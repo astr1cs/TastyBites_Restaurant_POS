@@ -1,6 +1,6 @@
 ﻿namespace TastyBites
 {
-    partial class Form1
+    partial class Login
     {
         /// <summary>
         ///  Required designer variable.
@@ -61,6 +61,7 @@
             userNameField.Name = "userNameField";
             userNameField.Size = new Size(100, 23);
             userNameField.TabIndex = 3;
+            userNameField.Text = "fd";
             userNameField.TextChanged += textBox2_TextChanged;
             // 
             // passwordField
@@ -81,18 +82,19 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
-            // Form1
+            // Login
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1008, 729);
             Controls.Add(button1);
             Controls.Add(passwordField);
             Controls.Add(userNameField);
             Controls.Add(label2);
             Controls.Add(label1);
-            Name = "Form1";
-            Text = "Form1";
+            Name = "Login";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Login";
             ResumeLayout(false);
             PerformLayout();
         }

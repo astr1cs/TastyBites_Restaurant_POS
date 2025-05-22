@@ -11,12 +11,19 @@ namespace TastyBites
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new Form1());
+            Application.Run(new Login());
             Console.WriteLine("Main running");
-            //MessageBox.Show("Hello, World!");
+            //MessageBox.Show("Test Main");
         }
     }
 }
+
+
+ 
+
+
+
+// Sample code to test SQL connection
 //using System;
 //using System.Data.SqlClient;
 
