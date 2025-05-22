@@ -258,6 +258,7 @@
             Controls.Add(dataGridView1);
             Controls.Add(FavIcon);
             Name = "StaffDashboard";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Staff";
             Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)FavIcon).EndInit();

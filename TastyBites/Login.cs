@@ -73,5 +73,15 @@ namespace TastyBites
         {
 
         }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void passwordField_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

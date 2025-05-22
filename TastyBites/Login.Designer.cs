@@ -69,8 +69,10 @@
             passwordField.AccessibleName = "";
             passwordField.Location = new Point(150, 226);
             passwordField.Name = "passwordField";
+            passwordField.PasswordChar = '*';
             passwordField.Size = new Size(100, 23);
             passwordField.TabIndex = 4;
+            passwordField.TextChanged += passwordField_TextChanged;
             // 
             // button1
             // 
@@ -95,6 +97,7 @@
             Name = "Login";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Login";
+            Load += Login_Load;
             ResumeLayout(false);
             PerformLayout();
         }

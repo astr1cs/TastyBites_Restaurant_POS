@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Data.SqlClient;
 using TastyBites.Models;
 
@@ -35,6 +36,24 @@ namespace TastyBites.Database
 
             return null;
         }
+
+        // Get all users from DB
+        public DataTable GetAllUsers()
+        {
+            var dataTable = new DataTable();
+            string query = "SELECT UserID, Username, Role FROM Users";
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(query, conn))
+            using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+            {
+                conn.Open();
+                adapter.Fill(dataTable);
+            }
+
+            return dataTable;
+        }
+
 
         // Insert new user into DB
         public int InsertUser(string username, string password)
