@@ -41,7 +41,7 @@ namespace TastyBites.Database
         public DataTable GetAllUsers()
         {
             var dataTable = new DataTable();
-            string query = "SELECT UserID, Username, Role FROM Users";
+            string query = "SELECT UserID, Username, Password, Role FROM Users";
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             using (SqlCommand cmd = new SqlCommand(query, conn))
@@ -56,19 +56,54 @@ namespace TastyBites.Database
 
 
         // Insert new user into DB
-        public int InsertUser(string username, string password)
+        public int InsertUser(string username, string password, string role)
         {
-            string query = "INSERT INTO Users (Username, Password, Role) VALUES (@Username, @Password, 'Staff')"; // default role as Staff
+            string query = "INSERT INTO Users (Username, Password, Role) VALUES (@Username, @Password, @Role)"; // default role as Staff
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             using (SqlCommand cmd = new SqlCommand(query, conn))
             {
                 cmd.Parameters.AddWithValue("@Username", username);
                 cmd.Parameters.AddWithValue("@Password", password);
+                cmd.Parameters.AddWithValue("@Role", role); // default role as Staff
 
                 conn.Open();
                 return cmd.ExecuteNonQuery();
             }
         }
+        
+        //Delete Selected User
+        public int DeleteUser(int userId)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "DELETE FROM Users WHERE UserID = @UserID";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@UserID", userId);
+                conn.Open();
+                return cmd.ExecuteNonQuery();
+            }
+        }
+
+        //EDIT/UPDATE SELECTED USER
+        public int UpdateUser(int userId, string username, string password, string role)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "UPDATE Users SET Username = @Username, Password = @Password, Role = @Role WHERE UserID = @UserID";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@Username", username);
+                cmd.Parameters.AddWithValue("@Password", password);
+                cmd.Parameters.AddWithValue("@Role", role);
+                cmd.Parameters.AddWithValue("@UserID", userId);
+
+                conn.Open();
+                return cmd.ExecuteNonQuery();
+            }
+        }
+
+
+
+
     }
 }

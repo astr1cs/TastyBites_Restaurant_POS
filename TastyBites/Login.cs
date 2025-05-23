@@ -4,6 +4,7 @@ using TastyBites.Database;
 using TastyBites.Models;
 using TastyBites.Staff;
 
+using TastyBites.Manager;
 namespace TastyBites
 {
     public partial class Login : Form
@@ -46,8 +47,8 @@ namespace TastyBites
                     }
                     else if (user.Role == "Manager")
                     {
-                        //ManagerDashboard manager = new ManagerDashboard(user);
-                        //manager.Show();
+                   managerDashboard manager = new managerDashboard(user);       
+                        manager.Show();
                     }
                     else if (user.Role == "Staff")
                     {
