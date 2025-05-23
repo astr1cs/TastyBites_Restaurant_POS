@@ -53,7 +53,85 @@ namespace TastyBites.Database
 
             return dataTable;
         }
+        //Get All Menu Items from DB
+        public DataTable GetAllMenuItems()
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = @"SELECT m.MenuItemID, m.Name, m.Description, m.Price, m.StockQuantity, c.CategoryName
+                         FROM MenuItem m
+                         INNER JOIN Category c ON m.CategoryID = c.CategoryID";
 
+                SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+                return dt;
+            }
+        }
+        //Gett all Menu Stock Items List
+        public DataTable GetAllMenuStockItems()
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = @"SELECT m.Name, m.Price, m.StockQuantity, c.CategoryName FROM MenuItem m INNER
+                                JOIN Category c ON m.CategoryID = c.CategoryID";
+
+                SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+                return dt;
+            }
+
+        }
+
+        //Search Menu Item by Name
+        public DataTable SearchMenuItemsByName(string keyword)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "SELECT * FROM MenuItem WHERE Name LIKE @Keyword";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@Keyword", "%" + keyword + "%");
+
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+                return dt;
+            }
+        }
+        //Search Stock Menu by Names
+        public DataTable SearchStockMenuItemsByName(string keyword)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = @"
+            SELECT m.Name, m.Price, m.StockQuantity, c.CategoryName
+            FROM MenuItem m
+            INNER JOIN Category c ON m.CategoryID = c.CategoryID
+            WHERE m.Name LIKE @Keyword";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@Keyword", "%" + keyword + "%");
+
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+                return dt;
+            }
+        }
+        //Search User by Name
+        public DataTable SearchUsersByUsername(string keyword)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "SELECT * FROM Users WHERE Username LIKE @Keyword";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@Keyword", "%" + keyword + "%");
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+                return dt;
+            }
+        }
 
         // Insert new user into DB
         public int InsertUser(string username, string password, string role)
@@ -102,7 +180,67 @@ namespace TastyBites.Database
             }
         }
 
+        //INSERT MENU ITEM
+        public int InsertMenuItem(string name, string description, decimal price, int stockQty, int categoryID)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "INSERT INTO MenuItem (Name, Description, Price, StockQuantity, CategoryID) " +
+                               "VALUES (@Name, @Description, @Price, @StockQuantity, @CategoryID)";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@Name", name);
+                cmd.Parameters.AddWithValue("@Description", description);
+                cmd.Parameters.AddWithValue("@Price", price);
+                cmd.Parameters.AddWithValue("@StockQuantity", stockQty);
+                cmd.Parameters.AddWithValue("@CategoryID", categoryID);
 
+                conn.Open();
+                return cmd.ExecuteNonQuery();
+            }
+        }
+
+        //Get Menu Data
+        public DataTable GetAllCategories()
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "SELECT CategoryID, CategoryName FROM Category";
+                SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
+                DataTable table = new DataTable();
+                adapter.Fill(table);
+                return table;
+            }
+        }
+
+        //Delete Menu Item
+        public int DeleteMenuItem(int menuItemId)
+        { 
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "DELETE FROM MenuItem WHERE MenuItemID = @MenuItemID";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@MenuItemID", menuItemId);
+                conn.Open();
+                return cmd.ExecuteNonQuery();
+            }
+        }
+        //Update Menu Item
+        public int UpdateMenuItem(int menuItemId, string name, string description, decimal price, int stockQty, int categoryID)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "UPDATE MenuItem SET Name = @Name, Description = @Description, Price = @Price, StockQuantity = @StockQuantity, CategoryID = @CategoryID WHERE MenuItemID = @MenuItemID";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@Name", name);
+                cmd.Parameters.AddWithValue("@Description", description);
+                cmd.Parameters.AddWithValue("@Price", price);
+                cmd.Parameters.AddWithValue("@StockQuantity", stockQty);
+                cmd.Parameters.AddWithValue("@CategoryID", categoryID);
+                cmd.Parameters.AddWithValue("@MenuItemID", menuItemId);
+                conn.Open();
+                return cmd.ExecuteNonQuery();
+            }
+        }
 
 
     }
