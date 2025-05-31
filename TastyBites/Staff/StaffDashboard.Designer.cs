@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StaffDashboard));
             FavIcon = new PictureBox();
-            dataGridView1 = new DataGridView();
+            staffOrderGrid = new DataGridView();
             placeOrderBtn = new Button();
             label1 = new Label();
             label2 = new Label();
@@ -40,17 +40,26 @@
             comboBox1 = new ComboBox();
             label4 = new Label();
             label5 = new Label();
-            label6 = new Label();
-            label7 = new Label();
             label8 = new Label();
             palestineTextBox = new TextBox();
             roleNameLabel = new Label();
             Staff = new Label();
             dataGridView2 = new DataGridView();
             logoutBtn = new Button();
+            staffSearchBox = new TextBox();
+            panel1 = new Panel();
+            staffDataGrid = new DataGridView();
+            staffAllMenuBtn = new Button();
+            staffSearchBtn = new Button();
+            label9 = new Label();
+            staffPriceSortComboBox = new ComboBox();
+            staffCategoryComboBox = new ComboBox();
+            staffOrderListBox = new ListBox();
             ((System.ComponentModel.ISupportInitialize)FavIcon).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)staffOrderGrid).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
+            panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)staffDataGrid).BeginInit();
             SuspendLayout();
             // 
             // FavIcon
@@ -62,13 +71,14 @@
             FavIcon.TabIndex = 0;
             FavIcon.TabStop = false;
             // 
-            // dataGridView1
+            // staffOrderGrid
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(756, 69);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(240, 662);
-            dataGridView1.TabIndex = 1;
+            staffOrderGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            staffOrderGrid.Location = new Point(756, 69);
+            staffOrderGrid.Name = "staffOrderGrid";
+            staffOrderGrid.Size = new Size(240, 662);
+            staffOrderGrid.TabIndex = 1;
+            staffOrderGrid.CellContentClick += staffOrderGrid_CellContentClick;
             // 
             // placeOrderBtn
             // 
@@ -159,24 +169,6 @@
             label5.TabIndex = 10;
             label5.Text = "$58.68";
             // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Location = new Point(781, 125);
-            label6.Name = "label6";
-            label6.Size = new Size(134, 15);
-            label6.TabIndex = 11;
-            label6.Text = "2x Pasta with Roast Beef";
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Location = new Point(929, 125);
-            label7.Name = "label7";
-            label7.Size = new Size(40, 15);
-            label7.TabIndex = 12;
-            label7.Text = "$45.62";
-            // 
             // label8
             // 
             label8.AutoSize = true;
@@ -233,19 +225,105 @@
             logoutBtn.UseVisualStyleBackColor = true;
             logoutBtn.Click += logoutBtn_Click;
             // 
+            // staffSearchBox
+            // 
+            staffSearchBox.Location = new Point(0, 3);
+            staffSearchBox.Name = "staffSearchBox";
+            staffSearchBox.Size = new Size(429, 23);
+            staffSearchBox.TabIndex = 20;
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(staffDataGrid);
+            panel1.Controls.Add(staffAllMenuBtn);
+            panel1.Controls.Add(staffSearchBtn);
+            panel1.Controls.Add(staffSearchBox);
+            panel1.Location = new Point(156, 69);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(594, 662);
+            panel1.TabIndex = 21;
+            // 
+            // staffDataGrid
+            // 
+            staffDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            staffDataGrid.Location = new Point(0, 32);
+            staffDataGrid.Name = "staffDataGrid";
+            staffDataGrid.Size = new Size(594, 630);
+            staffDataGrid.TabIndex = 23;
+            staffDataGrid.CellClick += staffDataGrid_CellClick;
+            staffDataGrid.CellContentClick += dataGridView3_CellContentClick;
+            // 
+            // staffAllMenuBtn
+            // 
+            staffAllMenuBtn.Location = new Point(516, 3);
+            staffAllMenuBtn.Name = "staffAllMenuBtn";
+            staffAllMenuBtn.Size = new Size(75, 23);
+            staffAllMenuBtn.TabIndex = 22;
+            staffAllMenuBtn.Text = "All Menu";
+            staffAllMenuBtn.UseVisualStyleBackColor = true;
+            // 
+            // staffSearchBtn
+            // 
+            staffSearchBtn.Location = new Point(435, 3);
+            staffSearchBtn.Name = "staffSearchBtn";
+            staffSearchBtn.Size = new Size(75, 23);
+            staffSearchBtn.TabIndex = 21;
+            staffSearchBtn.Text = "Search";
+            staffSearchBtn.UseVisualStyleBackColor = true;
+            staffSearchBtn.Click += staffSearchBtn_Click;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(12, 125);
+            label9.Name = "label9";
+            label9.Size = new Size(41, 15);
+            label9.TabIndex = 22;
+            label9.Text = "Filters:";
+            // 
+            // staffPriceSortComboBox
+            // 
+            staffPriceSortComboBox.FormattingEnabled = true;
+            staffPriceSortComboBox.Items.AddRange(new object[] { "Sort By Default", "Low to High", "High to Low" });
+            staffPriceSortComboBox.Location = new Point(12, 157);
+            staffPriceSortComboBox.Name = "staffPriceSortComboBox";
+            staffPriceSortComboBox.Size = new Size(121, 23);
+            staffPriceSortComboBox.TabIndex = 23;
+            // 
+            // staffCategoryComboBox
+            // 
+            staffCategoryComboBox.FormattingEnabled = true;
+            staffCategoryComboBox.Items.AddRange(new object[] { "Drinks", "Main", "Dessert" });
+            staffCategoryComboBox.Location = new Point(12, 197);
+            staffCategoryComboBox.Name = "staffCategoryComboBox";
+            staffCategoryComboBox.Size = new Size(121, 23);
+            staffCategoryComboBox.TabIndex = 24;
+            // 
+            // staffOrderListBox
+            // 
+            staffOrderListBox.FormattingEnabled = true;
+            staffOrderListBox.ItemHeight = 15;
+            staffOrderListBox.Location = new Point(780, 126);
+            staffOrderListBox.Name = "staffOrderListBox";
+            staffOrderListBox.Size = new Size(208, 274);
+            staffOrderListBox.TabIndex = 25;
+            // 
             // StaffDashboard
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1008, 729);
+            Controls.Add(staffOrderListBox);
+            Controls.Add(staffCategoryComboBox);
+            Controls.Add(staffPriceSortComboBox);
+            Controls.Add(label9);
+            Controls.Add(panel1);
             Controls.Add(logoutBtn);
             Controls.Add(dataGridView2);
             Controls.Add(Staff);
             Controls.Add(roleNameLabel);
             Controls.Add(palestineTextBox);
             Controls.Add(label8);
-            Controls.Add(label7);
-            Controls.Add(label6);
             Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(comboBox1);
@@ -255,15 +333,18 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(placeOrderBtn);
-            Controls.Add(dataGridView1);
+            Controls.Add(staffOrderGrid);
             Controls.Add(FavIcon);
             Name = "StaffDashboard";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Staff";
             Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)FavIcon).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)staffOrderGrid).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)staffDataGrid).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -271,7 +352,7 @@
         #endregion
 
         private PictureBox FavIcon;
-        private DataGridView dataGridView1;
+        private DataGridView staffOrderGrid;
         private Button placeOrderBtn;
         private Label label1;
         private Label label2;
@@ -281,13 +362,20 @@
         private ComboBox comboBox1;
         private Label label4;
         private Label label5;
-        private Label label6;
-        private Label label7;
         private Label label8;
         private TextBox palestineTextBox;
         private Label roleNameLabel;
         private Label Staff;
         private DataGridView dataGridView2;
         private Button logoutBtn;
+        private TextBox staffSearchBox;
+        private Panel panel1;
+        private DataGridView staffDataGrid;
+        private Button staffAllMenuBtn;
+        private Button staffSearchBtn;
+        private Label label9;
+        private ComboBox staffPriceSortComboBox;
+        private ComboBox staffCategoryComboBox;
+        private ListBox staffOrderListBox;
     }
 }

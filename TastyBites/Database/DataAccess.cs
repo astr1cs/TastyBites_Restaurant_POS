@@ -7,7 +7,7 @@ namespace TastyBites.Database
 {
     class DataAccess
     {
-        private readonly string connectionString = @"Data Source=DESKTOP-U6CD3IB;Initial Catalog=Demo;Integrated Security=True";
+        private readonly string connectionString = @"Data Source=DESKTOP-J3H208I;Initial Catalog=Demo;Integrated Security=True";
 
         // Authenticate user by checking username and password from DB
         public User AuthenticateUser(string username, string password)
@@ -74,6 +74,21 @@ namespace TastyBites.Database
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 string query = @"SELECT m.Name, m.Price, m.StockQuantity, c.CategoryName FROM MenuItem m INNER
+                                JOIN Category c ON m.CategoryID = c.CategoryID";
+
+                SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+                return dt;
+            }
+
+        }
+        //Get Menu Items for Staff 
+        public DataTable GetAllMenuStockItemsStaff()
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = @"SELECT m.MenuItemID, m.Name, m.Price, m.StockQuantity, c.CategoryName FROM MenuItem m INNER
                                 JOIN Category c ON m.CategoryID = c.CategoryID";
 
                 SqlDataAdapter adapter = new SqlDataAdapter(query, conn);

@@ -602,5 +602,25 @@ namespace TastyBites
         {
 
         }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+            using (Pen pen = new Pen(Color.LightGray, 1)) // 20 pixels thick
+            {
+                int x = panel1.ClientRectangle.Right - 10; // Adjust to be inside the panel
+                e.Graphics.DrawLine(pen, x, 0, x, panel1.ClientRectangle.Height);
+            }
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+            using (Pen pen = new Pen(Color.LightGray, 1)) // 1 pixel thick
+            {
+                int y = panel2.ClientRectangle.Height - 1; // Bottom Y position
+                e.Graphics.DrawLine(pen, 0, y, panel2.ClientRectangle.Width, y); // Horizontal line
+            }
+        }
+
     }
 }
