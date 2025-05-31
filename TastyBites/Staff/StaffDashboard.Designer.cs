@@ -1,4 +1,6 @@
-﻿namespace TastyBites.Staff
+﻿using System.Windows.Forms;
+
+namespace TastyBites.Staff
 {
     partial class StaffDashboard
     {
@@ -29,6 +31,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StaffDashboard));
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             FavIcon = new PictureBox();
             staffOrderGrid = new DataGridView();
             placeOrderBtn = new Button();
@@ -73,6 +78,7 @@
             // 
             // staffOrderGrid
             // 
+            staffOrderGrid.BackgroundColor = SystemColors.ButtonFace;
             staffOrderGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             staffOrderGrid.Location = new Point(756, 69);
             staffOrderGrid.Name = "staffOrderGrid";
@@ -217,12 +223,13 @@
             // 
             // logoutBtn
             // 
+            logoutBtn.BackColor = Color.FromArgb(27, 160, 154);
             logoutBtn.Location = new Point(12, 679);
             logoutBtn.Name = "logoutBtn";
             logoutBtn.Size = new Size(124, 23);
             logoutBtn.TabIndex = 19;
             logoutBtn.Text = "Logout";
-            logoutBtn.UseVisualStyleBackColor = true;
+            logoutBtn.UseVisualStyleBackColor = false;
             logoutBtn.Click += logoutBtn_Click;
             // 
             // staffSearchBox
@@ -245,9 +252,39 @@
             // 
             // staffDataGrid
             // 
-            staffDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            staffDataGrid.AllowUserToAddRows = false;
+            staffDataGrid.AllowUserToResizeColumns = false;
+            dataGridViewCellStyle1.BackColor = Color.WhiteSmoke;
+            staffDataGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            staffDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            staffDataGrid.BackgroundColor = SystemColors.ButtonFace;
+            staffDataGrid.BorderStyle = BorderStyle.None;
+            staffDataGrid.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.LightSteelBlue;
+            dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 10F);
+            dataGridViewCellStyle2.ForeColor = Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            staffDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            staffDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Window;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = Color.SteelBlue;
+            dataGridViewCellStyle3.SelectionForeColor = Color.White;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            staffDataGrid.DefaultCellStyle = dataGridViewCellStyle3;
+            staffDataGrid.EnableHeadersVisualStyles = false;
+            staffDataGrid.GridColor = Color.LightGray;
             staffDataGrid.Location = new Point(0, 32);
+            staffDataGrid.MultiSelect = false;
             staffDataGrid.Name = "staffDataGrid";
+            staffDataGrid.ReadOnly = true;
+            staffDataGrid.RowHeadersVisible = false;
+            staffDataGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             staffDataGrid.Size = new Size(594, 630);
             staffDataGrid.TabIndex = 23;
             staffDataGrid.CellClick += staffDataGrid_CellClick;
@@ -261,6 +298,7 @@
             staffAllMenuBtn.TabIndex = 22;
             staffAllMenuBtn.Text = "All Menu";
             staffAllMenuBtn.UseVisualStyleBackColor = true;
+            staffAllMenuBtn.Click += staffAllMenuBtn_Click_1;
             // 
             // staffSearchBtn
             // 
@@ -301,11 +339,11 @@
             // 
             // staffOrderListBox
             // 
+            staffOrderListBox.Font = new Font("MS Reference Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             staffOrderListBox.FormattingEnabled = true;
-            staffOrderListBox.ItemHeight = 15;
             staffOrderListBox.Location = new Point(780, 126);
             staffOrderListBox.Name = "staffOrderListBox";
-            staffOrderListBox.Size = new Size(208, 274);
+            staffOrderListBox.Size = new Size(208, 260);
             staffOrderListBox.TabIndex = 25;
             // 
             // StaffDashboard
@@ -335,6 +373,8 @@
             Controls.Add(placeOrderBtn);
             Controls.Add(staffOrderGrid);
             Controls.Add(FavIcon);
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "StaffDashboard";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Staff";

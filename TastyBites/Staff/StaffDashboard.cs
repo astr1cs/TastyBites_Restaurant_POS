@@ -88,7 +88,7 @@ namespace TastyBites.Staff
             Login loginForm = new Login();
             loginForm.Show();
         }
-
+            
         private void dataGridView3_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -167,6 +167,9 @@ namespace TastyBites.Staff
             staffDataGrid.DataSource = filteredItems;
         }
 
-       
+        private void staffAllMenuBtn_Click_1(object sender, EventArgs e)
+        {
+            LoadMenuItems();
+        }
     }
 }

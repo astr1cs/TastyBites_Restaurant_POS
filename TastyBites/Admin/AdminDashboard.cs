@@ -16,6 +16,8 @@ namespace TastyBites
     {
         private User currentUser;
         private DataTable allMenuItems;
+        private DataGridViewRow selectedMenuRow;
+
 
 
         public AdminDashboard()
@@ -81,12 +83,16 @@ namespace TastyBites
             LoadCategoriesIntoDropdown();
             LoadMenuItems();
             LoadUsersIntoGrid();
+            LoadStockHistory();
+            addUser.Visible = true;
+            saveChangesButton.Visible = false;
+
+            editMenuBtn.Visible = true;
+            saveChangesMenu.Visible = false;
+
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
 
-        }
         private void LogoutBtn_Click(object sender, EventArgs e)
         {
             this.Hide(); // Hide current dashboard
@@ -94,30 +100,7 @@ namespace TastyBites
             loginForm.Show(); // Show login form
         }
 
-        private void label3_Click(object sender, EventArgs e)
-        {
 
-        }
-
-
-
-
-
-
-        private void userTableGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void label3_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void menuListBtn_Click(object sender, EventArgs e)
         {
@@ -157,15 +140,7 @@ namespace TastyBites
             dataPanel.BringToFront();
         }
 
-        private void adminLabel_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void userName_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void addUser_Click(object sender, EventArgs e)
         {
@@ -206,10 +181,7 @@ namespace TastyBites
             }
         }
 
-        private void userTableGrid_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
-        {
 
-        }
         //----------------------------------------------**------------------------------
         //Delete User Button
         private void deleteUser_Click(object sender, EventArgs e)
@@ -254,62 +226,79 @@ namespace TastyBites
 
         //-----------------------------------------------**------------------------------
         //Edit User Button
+
+
+        //EDIT USER BUTTOn
         private void editUser_Click(object sender, EventArgs e)
         {
-
-
             if (userTableGrid.SelectedRows.Count == 0)
             {
-                MessageBox.Show("Please select a user to edit.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please select a user to edit.");
                 return;
             }
 
-            int userId = Convert.ToInt32(userTableGrid.SelectedRows[0].Cells["UserID"].Value);
-            string username = userNameTextBox.Text.Trim();
-            string password = passwordFieldBox.Text.Trim();
-            string role = roleComboBox.Text.Trim();
+            var selectedRow = userTableGrid.SelectedRows[0];
+            userNameTextBox.Text = selectedRow.Cells["Username"].Value.ToString();
+            passwordFieldBox.Text = selectedRow.Cells["Password"].Value.ToString();
+            roleComboBox.Text = selectedRow.Cells["Role"].Value.ToString();
 
-            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(role))
-            {
-                MessageBox.Show("Please fill all fields.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            // Optional: Enable Save button after data is loaded
+            saveChangesButton.Visible = true;
 
-            try
-            {
-                DataAccess db = new DataAccess();
-                int result = db.UpdateUser(userId, username, password, role);
-
-                if (result > 0)
-                {
-                    MessageBox.Show("User updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    LoadUsersIntoGrid(); // Refresh
-                }
-                else
-                {
-                    MessageBox.Show("Update failed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("An error occurred: " + ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            saveChangesButton.Enabled = true;
+            addUser.Visible = false; // Hide Add User button when editing   
         }
-
-        //Editable User Table Grid View
-        private void userTableGrid_SelectionChanged(object sender, EventArgs e)
+        //Save user changes
+        private void saveChangesButton_Click(object sender, EventArgs e)
         {
-            if (userTableGrid.SelectedRows.Count > 0)
+            if (userTableGrid.SelectedRows.Count == 0)
             {
-                var row = userTableGrid.SelectedRows[0];
-                userNameTextBox.Text = row.Cells["Username"].Value.ToString();
-                passwordFieldBox.Text = row.Cells["Password"].Value.ToString(); // If password is in grid
-                roleComboBox.Text = row.Cells["Role"].Value.ToString();
+                MessageBox.Show("Please select a user.");
+                return;
             }
 
+            var selectedRow = userTableGrid.SelectedRows[0];
+            int userId = Convert.ToInt32(selectedRow.Cells["UserID"].Value);
+            string updatedUsername = userNameTextBox.Text.Trim();
+            string updatedPassword = passwordFieldBox.Text.Trim();
+            string updatedRole = roleComboBox.Text.Trim();
+
+            if (string.IsNullOrEmpty(updatedUsername) || string.IsNullOrEmpty(updatedPassword) || string.IsNullOrEmpty(updatedRole))
+            {
+                MessageBox.Show("All fields are required.");
+                return;
+            }
+
+            DataAccess db = new DataAccess();
+            int result = db.UpdateUser(userId, updatedUsername, updatedPassword, updatedRole);
+
+
+            if (result > 0)
+            {
+                MessageBox.Show("User updated successfully.");
+                LoadUsersIntoGrid();
+
+
+                // After successful save:
+                addUser.Visible = true;
+                saveChangesButton.Visible = false;
+                ClearFieldsUserPanel();
+            }
+            else
+            {
+                MessageBox.Show("Update failed.");
+            }
         }
 
         //Menu Item Add Button
+
+
+
+        //---------------------------------------------------------------------<MENU FUNCTIONS>--------------------------------------------------//////
+        private void menuShowDetailsBtn_Click(object sender, EventArgs e)
+        {
+            LoadMenuItems();
+        }
         private void addMenuBtn_Click(object sender, EventArgs e)
         {
             string name = menuNameTextBox.Text.Trim();
@@ -358,12 +347,6 @@ namespace TastyBites
                 MessageBox.Show("Failed to add menu item.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void deleteMenuBtn_Click(object sender, EventArgs e)
         {
             if (menuGrid.SelectedRows.Count == 0)
@@ -385,16 +368,65 @@ namespace TastyBites
 
             if (result > 0)
             {
-                MessageBox.Show("Menu item deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                LoadMenuItems(); //  Refresh the DataGridView
+                MessageBox.Show("Menu item updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LoadMenuItems(); // Refresh DataGridView
+
+                SetMenuInputsReadOnly(true);
+                editMenuBtn.Visible = true;
+                saveChangesMenu.Visible = false;
             }
             else
             {
                 MessageBox.Show("Failed to delete menu item.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        //MENU FUNCIONS
+        private void SetMenuInputsReadOnly(bool isReadOnly)
+        {
+            menuNameTextBox.ReadOnly = isReadOnly;
+            menuDescriptionTextBox.ReadOnly = isReadOnly;
+            menuPriceTextBox.ReadOnly = isReadOnly;
+            menuQuantityTextBox.ReadOnly = isReadOnly;
+            categoryComboBox.Enabled = !isReadOnly;
+        }
 
+        //EDIT MENU BUTTON
         private void editMenuBtn_Click(object sender, EventArgs e)
+        {
+            if (selectedMenuRow == null)
+            {
+                MessageBox.Show("Please select a menu item to edit.");
+                return;
+            }
+
+            // Populate the text fields with selected row data
+            menuNameTextBox.Text = selectedMenuRow.Cells["Name"].Value?.ToString();
+            menuDescriptionTextBox.Text = selectedMenuRow.Cells["Description"].Value?.ToString();
+            menuPriceTextBox.Text = selectedMenuRow.Cells["Price"].Value?.ToString();
+            menuQuantityTextBox.Text = selectedMenuRow.Cells["StockQuantity"].Value?.ToString();
+
+            string categoryName = selectedMenuRow.Cells["CategoryName"].Value?.ToString();
+            if (!string.IsNullOrEmpty(categoryName))
+            {
+                for (int i = 0; i < categoryComboBox.Items.Count; i++)
+                {
+                    if (categoryComboBox.Items[i] is DataRowView drv &&
+                        drv["CategoryName"].ToString() == categoryName)
+                    {
+                        categoryComboBox.SelectedIndex = i;
+                        break;
+                    }
+                }
+            }
+
+            // Enable editing
+            SetMenuInputsReadOnly(false);
+            saveChangesMenu.Visible = true; ;
+            editMenuBtn.Visible = false;
+        }
+
+        //SAVE CHANGES MENU BUTTON
+        private void saveChangesMenu_Click(object sender, EventArgs e)
         {
             if (menuGrid.SelectedRows.Count == 0)
             {
@@ -426,60 +458,60 @@ namespace TastyBites
             {
                 MessageBox.Show("Menu item updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 LoadMenuItems(); // Refresh DataGridView
+                SetMenuInputsReadOnly(false);
+                editMenuBtn.Visible = true;
+                saveChangesMenu.Visible = false;
             }
             else
             {
                 MessageBox.Show("Failed to update menu item.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
 
+        }
+        //MENU GRID SELECTION CHANGED
         private void menuGrid_SelectionChanged(object sender, EventArgs e)
         {
+            if (menuGrid.SelectedRows.Count > 0)
+            {
+                selectedMenuRow = menuGrid.SelectedRows[0];
 
+                // Clear and lock all inputs
+                menuNameTextBox.Clear();
+                menuDescriptionTextBox.Clear();
+                menuPriceTextBox.Clear();
+                menuQuantityTextBox.Clear();
+                categoryComboBox.SelectedIndex = -1;
+
+                SetMenuInputsReadOnly(true);
+                editMenuBtn.Enabled = true;
+                editMenuBtn.Visible = true;
+                saveChangesMenu.Visible = false;
+            }
         }
-
+        //MENU GRID CELL CLICK
         private void menuGrid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0) // Ensure it's not header row
+
+            if (e.RowIndex >= 0)
             {
-                DataGridViewRow row = menuGrid.Rows[e.RowIndex];
+                // Just store the selected row for later use
+                selectedMenuRow = menuGrid.Rows[e.RowIndex];
 
-                // Set textboxes
-                menuNameTextBox.Text = row.Cells["Name"].Value?.ToString() ?? "";
-                menuDescriptionTextBox.Text = row.Cells["Description"].Value?.ToString() ?? "";
-                menuPriceTextBox.Text = row.Cells["Price"].Value?.ToString() ?? "";
-                menuQuantityTextBox.Text = row.Cells["StockQuantity"].Value?.ToString() ?? "";
+                // Clear UI (optional)
+                menuNameTextBox.Clear();
+                menuDescriptionTextBox.Clear();
+                menuPriceTextBox.Clear();
+                menuQuantityTextBox.Clear();
+                categoryComboBox.SelectedIndex = -1;
 
-                // Get CategoryName from grid
-                string categoryName = row.Cells["CategoryName"].Value?.ToString();
-
-                if (!string.IsNullOrEmpty(categoryName))
-                {
-                    // Find category in ComboBox datasource by CategoryName and select it
-                    for (int i = 0; i < categoryComboBox.Items.Count; i++)
-                    {
-                        DataRowView drv = categoryComboBox.Items[i] as DataRowView;
-                        if (drv != null && drv["CategoryName"].ToString() == categoryName)
-                        {
-                            categoryComboBox.SelectedIndex = i;
-                            break;
-                        }
-                    }
-                }
+                //SetMenuInputsReadOnly(true);
+                //editMenuBtn.Visible = true;
+                //saveChangesMenu.Visible = false;
             }
         }
 
-        private void label6_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void menuSearchBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-
+        //MENU SEARCH FUNCTION
 
         private void menuSearchBtn_Click(object sender, EventArgs e)
         {
@@ -503,9 +535,6 @@ namespace TastyBites
         }
 
 
-
-
-
         private void userSearchBtn_Click(object sender, EventArgs e)
         {
             string searchTerm = userSearchBox.Text.Trim();
@@ -521,10 +550,6 @@ namespace TastyBites
                 MessageBox.Show("No matching users found.", "Search Result", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             userTableGrid.DataSource = filteredUsers;
-        }
-
-        private void stockGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
         }
 
 
@@ -556,10 +581,7 @@ namespace TastyBites
             LoadMenuItems();
         }
 
-        private void stockSortComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
 
-        }
 
         private void stockSortComboBox_SelectedIndexChanged_1(object sender, EventArgs e)
         {
@@ -593,15 +615,6 @@ namespace TastyBites
             LoadUsersIntoGrid();
         }
 
-        private void menuPanel_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void dataPanel_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
@@ -622,5 +635,57 @@ namespace TastyBites
             }
         }
 
+
+        //User panel clear fields function
+        private void ClearFieldsUserPanel()
+        {
+            userNameTextBox.Text = "";
+            passwordFieldBox.Text = "";
+            roleComboBox.SelectedIndex = -1;
+        }
+
+
+        //---------------------------------------------------------------------<ORDER History FUNCTIONS>--------------------------------------------------//////
+        private void LoadStockHistory()
+        {
+            DataAccess db = new DataAccess();
+            DataTable orderData = db.GetAllOrders();
+
+            stockHistoryGrid.DataSource = orderData;
+
+            // Optional: Disable sorting for all columns
+            foreach (DataGridViewColumn column in stockHistoryGrid.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+        }
+
+        private void orderHistorySearchBtn_Click(object sender, EventArgs e)
+        {
+            string searchTerm = orderHistorySearchBox.Text.Trim();
+
+            DataAccess db = new DataAccess();
+            DataTable dt;
+
+            if (string.IsNullOrEmpty(searchTerm))
+            {
+                dt = db.GetAllOrders();  // Load all orders when search is empty
+            }
+            else
+            {
+                dt = db.searchOrderHistory(searchTerm); // Search based on the term
+            }
+
+            stockHistoryGrid.DataSource = dt;
+        }
+
+        private void orderHistoryShowBtn_Click(object sender, EventArgs e)
+        {
+
+            LoadStockHistory(); // Reload all order history
+            orderHistorySearchBox.Clear(); // Clear search box
+            stockHistoryGrid.ClearSelection(); // Clear any selected rows
+        }
     }
+
 }

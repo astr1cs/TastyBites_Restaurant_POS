@@ -7,8 +7,10 @@ namespace TastyBites.Database
 {
     class DataAccess
     {
-        private readonly string connectionString = @"Data Source=DESKTOP-J3H208I;Initial Catalog=Demo;Integrated Security=True";
+        //Database Connection String
+        private readonly string connectionString = @"Data Source=DESKTOP-KP493J1\SQLEXPRESS;Initial Catalog=Demo;Integrated Security=True";
 
+        ///---------------------------------------------------ADMIN AUTHENTICATION AND MANAGEMENT---------------------------------------------------///
         // Authenticate user by checking username and password from DB
         public User AuthenticateUser(string username, string password)
         {
@@ -53,7 +55,72 @@ namespace TastyBites.Database
 
             return dataTable;
         }
-        //Get All Menu Items from DB
+
+        // Insert new user into DB
+        public int InsertUser(string username, string password, string role)
+        {
+            string query = "INSERT INTO Users (Username, Password, Role) VALUES (@Username, @Password, @Role)"; // default role as Staff
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@Username", username);
+                cmd.Parameters.AddWithValue("@Password", password);
+                cmd.Parameters.AddWithValue("@Role", role); // default role as Staff
+
+                conn.Open();
+                return cmd.ExecuteNonQuery();
+            }
+        }
+        
+        //Delete Selected User
+        public int DeleteUser(int userId)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "DELETE FROM Users WHERE UserID = @UserID";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@UserID", userId);
+                conn.Open();
+                return cmd.ExecuteNonQuery();
+            }
+        }
+
+        //EDIT/UPDATE SELECTED USER
+        public int UpdateUser(int userId, string username, string password, string role)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    string query = "UPDATE Users SET Username = @Username, Password = @Password, Role = @Role WHERE UserID = @UserID";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@Username", username);
+                    cmd.Parameters.AddWithValue("@Password", password);
+                    cmd.Parameters.AddWithValue("@Role", role);
+                    cmd.Parameters.AddWithValue("@UserID", userId);
+
+                    conn.Open();
+                    return cmd.ExecuteNonQuery();
+                }
+            }
+            catch (SqlException sqlEx)
+            {
+              
+                Console.WriteLine("SQL error while updating user: " + sqlEx.Message);
+                return -1; 
+            }
+            catch (Exception ex)
+            {
+                
+                Console.WriteLine("Unexpected error while updating user: " + ex.Message);
+                return -1;  
+            }
+        }
+
+
+
+        //---------------------------------------------------MENU MANAGEMENT---------------------------------------------------///
         public DataTable GetAllMenuItems()
         {
             using (SqlConnection conn = new SqlConnection(connectionString))
@@ -147,54 +214,6 @@ namespace TastyBites.Database
                 return dt;
             }
         }
-
-        // Insert new user into DB
-        public int InsertUser(string username, string password, string role)
-        {
-            string query = "INSERT INTO Users (Username, Password, Role) VALUES (@Username, @Password, @Role)"; // default role as Staff
-
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            using (SqlCommand cmd = new SqlCommand(query, conn))
-            {
-                cmd.Parameters.AddWithValue("@Username", username);
-                cmd.Parameters.AddWithValue("@Password", password);
-                cmd.Parameters.AddWithValue("@Role", role); // default role as Staff
-
-                conn.Open();
-                return cmd.ExecuteNonQuery();
-            }
-        }
-        
-        //Delete Selected User
-        public int DeleteUser(int userId)
-        {
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                string query = "DELETE FROM Users WHERE UserID = @UserID";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@UserID", userId);
-                conn.Open();
-                return cmd.ExecuteNonQuery();
-            }
-        }
-
-        //EDIT/UPDATE SELECTED USER
-        public int UpdateUser(int userId, string username, string password, string role)
-        {
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                string query = "UPDATE Users SET Username = @Username, Password = @Password, Role = @Role WHERE UserID = @UserID";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@Username", username);
-                cmd.Parameters.AddWithValue("@Password", password);
-                cmd.Parameters.AddWithValue("@Role", role);
-                cmd.Parameters.AddWithValue("@UserID", userId);
-
-                conn.Open();
-                return cmd.ExecuteNonQuery();
-            }
-        }
-
         //INSERT MENU ITEM
         public int InsertMenuItem(string name, string description, decimal price, int stockQty, int categoryID)
         {
@@ -256,6 +275,67 @@ namespace TastyBites.Database
                 return cmd.ExecuteNonQuery();
             }
         }
+
+        //---------------------------------------------------ORDER MANAGEMENT---------------------------------------------------///
+        // Get all orders
+        public DataTable GetAllOrders()
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = @"
+        SELECT 
+            o.OrderID,
+            o.OrderDateTime,
+            o.TotalAmount,
+            u.Username,
+            u.Role,
+            m.Name AS MenuItemName,
+            oi.Quantity,
+            oi.ItemPriceAtOrderTime
+        FROM [Order] o
+        INNER JOIN Users u ON o.UserID = u.UserID
+        INNER JOIN OrderItem oi ON o.OrderID = oi.OrderID
+        INNER JOIN MenuItem m ON oi.MenuItemID = m.MenuItemID
+        ORDER BY o.OrderID DESC";
+
+                SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+                return dt;
+            }
+        }
+        public DataTable searchOrderHistory(string searchTerm)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = @"
+        SELECT 
+            o.OrderID,
+            o.OrderDateTime,
+            o.TotalAmount,
+            u.Username,
+            u.Role,
+            m.Name AS MenuItemName,
+            oi.Quantity,
+            oi.ItemPriceAtOrderTime
+        FROM [Order] o
+        INNER JOIN Users u ON o.UserID = u.UserID
+        INNER JOIN OrderItem oi ON o.OrderID = oi.OrderID
+        INNER JOIN MenuItem m ON oi.MenuItemID = m.MenuItemID
+        WHERE u.Username LIKE @search
+           OR u.Role LIKE @search
+           OR m.Name LIKE @search
+        ORDER BY o.OrderID DESC";
+
+                SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
+                adapter.SelectCommand.Parameters.AddWithValue("@search", "%" + searchTerm + "%");
+
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+                return dt;
+            }
+        }
+
 
 
     }

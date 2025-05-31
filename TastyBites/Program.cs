@@ -1,3 +1,5 @@
+using TastyBites.Staff;
+
 namespace TastyBites
 {
     internal static class Program
@@ -11,8 +13,8 @@ namespace TastyBites
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            //Application.Run(new Login());
-            Application.Run(new AdminDashboard());
+            Application.Run(new Login());
+            //Application.Run(new StaffDashboard());
             Console.WriteLine("Main running");
             //MessageBox.Show("Test Main");
         }
