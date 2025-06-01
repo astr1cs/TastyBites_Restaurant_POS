@@ -34,18 +34,18 @@ namespace TastyBites
         private void InitializeComponent()
         {
             ComponentResourceManager resources = new ComponentResourceManager(typeof(AdminDashboard));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle25 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle26 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle27 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle28 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle29 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle30 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle31 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle32 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle33 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle34 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle35 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle36 = new DataGridViewCellStyle();
             usernameLabel = new Label();
             pictureBox1 = new PictureBox();
             logoutBtn = new Button();
@@ -97,6 +97,7 @@ namespace TastyBites
             stockSearchBox = new TextBox();
             stockGridView = new DataGridView();
             dataPanel = new Panel();
+            label1 = new Label();
             orderHistoryShowBtn = new Button();
             orderHistorySearchBtn = new Button();
             orderHistorySearchBox = new TextBox();
@@ -221,7 +222,7 @@ namespace TastyBites
             // 
             userManageLabel.AutoSize = true;
             userManageLabel.Font = new Font("MS Reference Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            userManageLabel.Location = new Point(25, 10);
+            userManageLabel.Location = new Point(25, 15);
             userManageLabel.Name = "userManageLabel";
             userManageLabel.Size = new Size(204, 26);
             userManageLabel.TabIndex = 49;
@@ -250,7 +251,7 @@ namespace TastyBites
             // 
             // passwordFieldBox
             // 
-            passwordFieldBox.Location = new Point(128, 137);
+            passwordFieldBox.Location = new Point(128, 124);
             passwordFieldBox.Name = "passwordFieldBox";
             passwordFieldBox.PasswordChar = '*';
             passwordFieldBox.Size = new Size(120, 23);
@@ -260,7 +261,7 @@ namespace TastyBites
             // 
             passwordLabel.AutoSize = true;
             passwordLabel.Font = new Font("Microsoft Sans Serif", 12F);
-            passwordLabel.Location = new Point(25, 140);
+            passwordLabel.Location = new Point(25, 127);
             passwordLabel.Name = "passwordLabel";
             passwordLabel.Size = new Size(82, 20);
             passwordLabel.TabIndex = 40;
@@ -271,14 +272,14 @@ namespace TastyBites
             roleComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             roleComboBox.FormattingEnabled = true;
             roleComboBox.Items.AddRange(new object[] { "Admin", "Manager", "Staff" });
-            roleComboBox.Location = new Point(127, 187);
+            roleComboBox.Location = new Point(127, 174);
             roleComboBox.Name = "roleComboBox";
             roleComboBox.Size = new Size(121, 23);
             roleComboBox.TabIndex = 39;
             // 
             // userNameTextBox
             // 
-            userNameTextBox.Location = new Point(127, 90);
+            userNameTextBox.Location = new Point(127, 77);
             userNameTextBox.Name = "userNameTextBox";
             userNameTextBox.Size = new Size(120, 23);
             userNameTextBox.TabIndex = 38;
@@ -286,7 +287,7 @@ namespace TastyBites
             // deleteUser
             // 
             deleteUser.Font = new Font("Microsoft Sans Serif", 12F);
-            deleteUser.Location = new Point(140, 298);
+            deleteUser.Location = new Point(140, 285);
             deleteUser.Name = "deleteUser";
             deleteUser.Size = new Size(109, 35);
             deleteUser.TabIndex = 36;
@@ -297,7 +298,7 @@ namespace TastyBites
             // editUser
             // 
             editUser.Font = new Font("Microsoft Sans Serif", 12F);
-            editUser.Location = new Point(25, 298);
+            editUser.Location = new Point(25, 285);
             editUser.Name = "editUser";
             editUser.Size = new Size(109, 35);
             editUser.TabIndex = 35;
@@ -309,7 +310,7 @@ namespace TastyBites
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Microsoft Sans Serif", 12F);
-            label3.Location = new Point(25, 190);
+            label3.Location = new Point(25, 177);
             label3.Name = "label3";
             label3.Size = new Size(46, 20);
             label3.TabIndex = 33;
@@ -319,7 +320,7 @@ namespace TastyBites
             // 
             userLabel.AutoSize = true;
             userLabel.Font = new Font("Microsoft Sans Serif", 12F);
-            userLabel.Location = new Point(25, 90);
+            userLabel.Location = new Point(25, 77);
             userLabel.Name = "userLabel";
             userLabel.Size = new Size(87, 20);
             userLabel.TabIndex = 32;
@@ -331,28 +332,28 @@ namespace TastyBites
             userTableGrid.AllowUserToDeleteRows = false;
             userTableGrid.AllowUserToResizeColumns = false;
             userTableGrid.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = Color.White;
-            userTableGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle25.BackColor = Color.White;
+            userTableGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle25;
             userTableGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             userTableGrid.BackgroundColor = Color.WhiteSmoke;
             userTableGrid.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.SteelBlue;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            userTableGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle26.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle26.BackColor = Color.SteelBlue;
+            dataGridViewCellStyle26.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            dataGridViewCellStyle26.ForeColor = Color.White;
+            dataGridViewCellStyle26.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle26.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle26.WrapMode = DataGridViewTriState.True;
+            userTableGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle26;
             userTableGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.WhiteSmoke;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle3.ForeColor = Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = Color.LightSteelBlue;
-            dataGridViewCellStyle3.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            userTableGrid.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle27.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle27.BackColor = Color.WhiteSmoke;
+            dataGridViewCellStyle27.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle27.ForeColor = Color.Black;
+            dataGridViewCellStyle27.SelectionBackColor = Color.LightSteelBlue;
+            dataGridViewCellStyle27.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle27.WrapMode = DataGridViewTriState.False;
+            userTableGrid.DefaultCellStyle = dataGridViewCellStyle27;
             userTableGrid.EnableHeadersVisualStyles = false;
             userTableGrid.GridColor = Color.LightGray;
             userTableGrid.Location = new Point(275, 51);
@@ -368,7 +369,7 @@ namespace TastyBites
             addUser.BackColor = Color.FromArgb(27, 160, 156);
             addUser.Font = new Font("Microsoft Sans Serif", 12F);
             addUser.ForeColor = Color.White;
-            addUser.Location = new Point(25, 244);
+            addUser.Location = new Point(25, 231);
             addUser.Name = "addUser";
             addUser.Size = new Size(223, 40);
             addUser.TabIndex = 55;
@@ -381,7 +382,7 @@ namespace TastyBites
             saveChangesButton.BackColor = Color.FromArgb(27, 160, 156);
             saveChangesButton.Font = new Font("Microsoft Sans Serif", 12F);
             saveChangesButton.ForeColor = Color.White;
-            saveChangesButton.Location = new Point(25, 244);
+            saveChangesButton.Location = new Point(25, 231);
             saveChangesButton.Name = "saveChangesButton";
             saveChangesButton.Size = new Size(223, 41);
             saveChangesButton.TabIndex = 46;
@@ -453,7 +454,7 @@ namespace TastyBites
             // 
             label6.AutoSize = true;
             label6.Font = new Font("MS Reference Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label6.Location = new Point(26, 14);
+            label6.Location = new Point(25, 15);
             label6.Name = "label6";
             label6.Size = new Size(172, 26);
             label6.TabIndex = 45;
@@ -523,28 +524,28 @@ namespace TastyBites
             menuGrid.AllowUserToDeleteRows = false;
             menuGrid.AllowUserToResizeColumns = false;
             menuGrid.AllowUserToResizeRows = false;
-            dataGridViewCellStyle4.BackColor = Color.White;
-            menuGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle28.BackColor = Color.White;
+            menuGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle28;
             menuGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             menuGrid.BackgroundColor = Color.WhiteSmoke;
             menuGrid.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = Color.SteelBlue;
-            dataGridViewCellStyle5.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold);
-            dataGridViewCellStyle5.ForeColor = Color.White;
-            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
-            menuGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle29.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle29.BackColor = Color.SteelBlue;
+            dataGridViewCellStyle29.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold);
+            dataGridViewCellStyle29.ForeColor = Color.White;
+            dataGridViewCellStyle29.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle29.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle29.WrapMode = DataGridViewTriState.True;
+            menuGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle29;
             menuGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = Color.WhiteSmoke;
-            dataGridViewCellStyle6.Font = new Font("Microsoft Sans Serif", 10F);
-            dataGridViewCellStyle6.ForeColor = Color.Black;
-            dataGridViewCellStyle6.SelectionBackColor = Color.LightSteelBlue;
-            dataGridViewCellStyle6.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
-            menuGrid.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle30.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle30.BackColor = Color.WhiteSmoke;
+            dataGridViewCellStyle30.Font = new Font("Microsoft Sans Serif", 10F);
+            dataGridViewCellStyle30.ForeColor = Color.Black;
+            dataGridViewCellStyle30.SelectionBackColor = Color.LightSteelBlue;
+            dataGridViewCellStyle30.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle30.WrapMode = DataGridViewTriState.False;
+            menuGrid.DefaultCellStyle = dataGridViewCellStyle30;
             menuGrid.EnableHeadersVisualStyles = false;
             menuGrid.GridColor = Color.LightGray;
             menuGrid.Location = new Point(26, 219);
@@ -722,29 +723,29 @@ namespace TastyBites
             stockGridView.AllowUserToAddRows = false;
             stockGridView.AllowUserToResizeColumns = false;
             stockGridView.AllowUserToResizeRows = false;
-            dataGridViewCellStyle7.BackColor = Color.WhiteSmoke;
-            stockGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle31.BackColor = Color.WhiteSmoke;
+            stockGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle31;
             stockGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             stockGridView.BackgroundColor = SystemColors.ButtonFace;
             stockGridView.BorderStyle = BorderStyle.None;
             stockGridView.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = Color.LightGray;
-            dataGridViewCellStyle8.Font = new Font("Microsoft Sans Serif", 10F);
-            dataGridViewCellStyle8.ForeColor = Color.Black;
-            dataGridViewCellStyle8.SelectionBackColor = Color.LightGray;
-            dataGridViewCellStyle8.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.True;
-            stockGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle32.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle32.BackColor = Color.LightGray;
+            dataGridViewCellStyle32.Font = new Font("Microsoft Sans Serif", 10F);
+            dataGridViewCellStyle32.ForeColor = Color.Black;
+            dataGridViewCellStyle32.SelectionBackColor = Color.LightGray;
+            dataGridViewCellStyle32.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle32.WrapMode = DataGridViewTriState.True;
+            stockGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle32;
             stockGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = SystemColors.Window;
-            dataGridViewCellStyle9.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle9.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle9.SelectionBackColor = Color.SteelBlue;
-            dataGridViewCellStyle9.SelectionForeColor = Color.White;
-            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.False;
-            stockGridView.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle33.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle33.BackColor = SystemColors.Window;
+            dataGridViewCellStyle33.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle33.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle33.SelectionBackColor = Color.SteelBlue;
+            dataGridViewCellStyle33.SelectionForeColor = Color.White;
+            dataGridViewCellStyle33.WrapMode = DataGridViewTriState.False;
+            stockGridView.DefaultCellStyle = dataGridViewCellStyle33;
             stockGridView.EnableHeadersVisualStyles = false;
             stockGridView.GridColor = Color.LightGray;
             stockGridView.Location = new Point(5, 39);
@@ -758,6 +759,7 @@ namespace TastyBites
             // 
             // dataPanel
             // 
+            dataPanel.Controls.Add(label1);
             dataPanel.Controls.Add(orderHistoryShowBtn);
             dataPanel.Controls.Add(orderHistorySearchBtn);
             dataPanel.Controls.Add(orderHistorySearchBox);
@@ -766,6 +768,16 @@ namespace TastyBites
             dataPanel.Name = "dataPanel";
             dataPanel.Size = new Size(867, 654);
             dataPanel.TabIndex = 5;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("MS Reference Sans Serif", 15.75F);
+            label1.Location = new Point(25, 15);
+            label1.Name = "label1";
+            label1.Size = new Size(155, 26);
+            label1.TabIndex = 50;
+            label1.Text = "Order History";
             // 
             // orderHistoryShowBtn
             // 
@@ -791,9 +803,9 @@ namespace TastyBites
             // 
             // orderHistorySearchBox
             // 
-            orderHistorySearchBox.Location = new Point(25, 17);
+            orderHistorySearchBox.Location = new Point(235, 17);
             orderHistorySearchBox.Name = "orderHistorySearchBox";
-            orderHistorySearchBox.Size = new Size(524, 23);
+            orderHistorySearchBox.Size = new Size(314, 23);
             orderHistorySearchBox.TabIndex = 47;
             // 
             // stockHistoryGrid
@@ -802,28 +814,28 @@ namespace TastyBites
             stockHistoryGrid.AllowUserToDeleteRows = false;
             stockHistoryGrid.AllowUserToResizeColumns = false;
             stockHistoryGrid.AllowUserToResizeRows = false;
-            dataGridViewCellStyle10.BackColor = Color.White;
-            stockHistoryGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle34.BackColor = Color.White;
+            stockHistoryGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle34;
             stockHistoryGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             stockHistoryGrid.BackgroundColor = Color.WhiteSmoke;
             stockHistoryGrid.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = Color.SteelBlue;
-            dataGridViewCellStyle11.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            dataGridViewCellStyle11.ForeColor = Color.White;
-            dataGridViewCellStyle11.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.True;
-            stockHistoryGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle35.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle35.BackColor = Color.SteelBlue;
+            dataGridViewCellStyle35.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            dataGridViewCellStyle35.ForeColor = Color.White;
+            dataGridViewCellStyle35.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle35.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle35.WrapMode = DataGridViewTriState.True;
+            stockHistoryGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle35;
             stockHistoryGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = Color.WhiteSmoke;
-            dataGridViewCellStyle12.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle12.ForeColor = Color.Black;
-            dataGridViewCellStyle12.SelectionBackColor = Color.LightSteelBlue;
-            dataGridViewCellStyle12.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle12.WrapMode = DataGridViewTriState.False;
-            stockHistoryGrid.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle36.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle36.BackColor = Color.WhiteSmoke;
+            dataGridViewCellStyle36.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle36.ForeColor = Color.Black;
+            dataGridViewCellStyle36.SelectionBackColor = Color.LightSteelBlue;
+            dataGridViewCellStyle36.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle36.WrapMode = DataGridViewTriState.False;
+            stockHistoryGrid.DefaultCellStyle = dataGridViewCellStyle36;
             stockHistoryGrid.EnableHeadersVisualStyles = false;
             stockHistoryGrid.GridColor = Color.LightGray;
             stockHistoryGrid.Location = new Point(17, 58);
@@ -852,7 +864,7 @@ namespace TastyBites
             panel1.Controls.Add(stockBtn);
             panel1.Controls.Add(manageUserBtn);
             panel1.Controls.Add(menuListBtn);
-            panel1.Location = new Point(-1, 76);
+            panel1.Location = new Point(0, 76);
             panel1.Name = "panel1";
             panel1.Size = new Size(155, 653);
             panel1.TabIndex = 44;
@@ -966,5 +978,6 @@ namespace TastyBites
         private Button orderHistorySearchBtn;
         private TextBox orderHistorySearchBox;
         private DataGridView stockHistoryGrid;
+        private Label label1;
     }
 }

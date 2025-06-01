@@ -3,6 +3,7 @@ using System.Data;
 using System.Data.SqlClient;
 using TastyBites.Models;
 
+
 namespace TastyBites.Database
 {
     class DataAccess
@@ -14,7 +15,7 @@ namespace TastyBites.Database
         // Authenticate user by checking username and password from DB
         public User AuthenticateUser(string username, string password)
         {
-            string query = "SELECT Username, Role FROM Users WHERE Username = @Username AND Password = @Password";
+            string query = "SELECT UserID, Username, Role FROM Users WHERE Username = @Username AND Password = @Password";
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             using (SqlCommand cmd = new SqlCommand(query, conn))
@@ -29,8 +30,9 @@ namespace TastyBites.Database
                     {
                         return new User
                         {
+                            UserID = Convert.ToInt32(reader["UserID"]), // Assuming UserID is also neededs
                             Username = reader["Username"].ToString(),
-                            Role = reader["Role"].ToString()
+                            Role = reader["Role"].ToString(),
                         };
                     }
                 }
@@ -72,7 +74,7 @@ namespace TastyBites.Database
                 return cmd.ExecuteNonQuery();
             }
         }
-        
+
         //Delete Selected User
         public int DeleteUser(int userId)
         {
@@ -106,15 +108,15 @@ namespace TastyBites.Database
             }
             catch (SqlException sqlEx)
             {
-              
+
                 Console.WriteLine("SQL error while updating user: " + sqlEx.Message);
-                return -1; 
+                return -1;
             }
             catch (Exception ex)
             {
-                
+
                 Console.WriteLine("Unexpected error while updating user: " + ex.Message);
-                return -1;  
+                return -1;
             }
         }
 
@@ -248,7 +250,7 @@ namespace TastyBites.Database
 
         //Delete Menu Item
         public int DeleteMenuItem(int menuItemId)
-        { 
+        {
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 string query = "DELETE FROM MenuItem WHERE MenuItemID = @MenuItemID";
@@ -336,7 +338,70 @@ namespace TastyBites.Database
             }
         }
 
+        public int GetMenuItemIdByName(string menuName)
+        {
+            int menuItemId = -1;
 
 
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "SELECT MenuItemID FROM MenuItem WHERE Name = @name";
+
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@name", menuName);
+
+                conn.Open();
+                var result = cmd.ExecuteScalar();
+                if (result != null)
+                {
+                    menuItemId = Convert.ToInt32(result);
+                }
+            }
+            return menuItemId;
+        }
+
+        public int InsertOrder(int userId, DateTime orderDate, string delivery, string paymentMethod, decimal totalAmount)
+        {
+            int orderId = -1;
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = @"
+                INSERT INTO [Order] (UserID, OrderDateTime, Type, PaymentMethod, TotalAmount)
+                OUTPUT INSERTED.OrderID
+                VALUES (@userId, @orderDate, @delivery, @paymentMethod, @totalAmount)";
+
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@userId", userId);
+                cmd.Parameters.AddWithValue("@orderDate", orderDate);
+                cmd.Parameters.AddWithValue("@delivery", delivery);
+                cmd.Parameters.AddWithValue("@paymentMethod", paymentMethod);
+                cmd.Parameters.AddWithValue("@totalAmount", totalAmount);
+
+                conn.Open();
+                orderId = (int)cmd.ExecuteScalar();
+            }
+            return orderId;
+        }
+        public void InsertOrderItem(int orderId, int menuItemId, int quantity, decimal priceAtOrderTime)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = @"
+                INSERT INTO [OrderItem] (OrderID, MenuItemID, Quantity, itemPriceAtOrderTime)
+                VALUES (@orderId, @menuItemId, @quantity, @priceAtOrderTime)";
+
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@orderId", orderId);
+                cmd.Parameters.AddWithValue("@menuItemId", menuItemId);
+                cmd.Parameters.AddWithValue("@quantity", quantity);
+                cmd.Parameters.AddWithValue("@priceAtOrderTime", priceAtOrderTime);
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+
+
+        }
     }
 }
