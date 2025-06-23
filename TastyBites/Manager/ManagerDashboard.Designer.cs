@@ -123,6 +123,7 @@
             logoutBtn.TabIndex = 46;
             logoutBtn.Text = "Logout";
             logoutBtn.UseVisualStyleBackColor = false;
+            logoutBtn.Click += logoutBtn_Click;
             // 
             // orderHistoryShowBtn
             // 

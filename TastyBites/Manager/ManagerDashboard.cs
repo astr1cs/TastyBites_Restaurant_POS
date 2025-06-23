@@ -116,5 +116,12 @@ namespace TastyBites.Manager
                 e.Graphics.DrawLine(pen, x, 0, x, panel1.ClientRectangle.Height);
             }
         }
+
+        private void logoutBtn_Click(object sender, EventArgs e)
+        {
+            this.Hide(); // Hide current dashboard
+            Login loginForm = new Login();
+            loginForm.Show(); // Show login form
+        }
     }
 }
