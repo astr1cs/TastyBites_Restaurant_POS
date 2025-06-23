@@ -413,7 +413,7 @@ namespace TastyBites.Staff
             // Clear the list and table
             orderItems.Clear();
             orderTable.Rows.Clear(); // optional if RefreshOrderGridBox is called next
-       
+            subTotalBox.Text ="";
 
 
         }
