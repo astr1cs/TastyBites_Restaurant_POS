@@ -15,6 +15,7 @@ namespace TastyBites.Manager
 
     public partial class managerDashboard : Form
     {
+        private DataTable allMenuItems;
         public managerDashboard()
         {
             InitializeComponent();
@@ -37,10 +38,17 @@ namespace TastyBites.Manager
         private void managerDashboard_Load(object sender, EventArgs e)
         {
             LoadStockHistory(); // Load stock history on form load
+            LoadMenuItems(); // Load menu items on form load
         }
-
+        //-----------------------------------------------------------SIDEBAR BUTTONS-----------------------------------------------------------
         private void orderHistoryBtn_Click(object sender, EventArgs e)
         {
+
+            stockPanel.Visible = false; // Hide stock panel
+            //ordeerHistoryPanelMD.Visible = true; // Show order history panel
+            //ordeerHistoryPanelMD.BringToFront(); // Bring order history panel to front
+
+            // This method is called when the "Order History" button is clicked
             string searchTerm = orderHistorySearchBox.Text.Trim();
 
             DataAccess db = new DataAccess();
@@ -57,6 +65,18 @@ namespace TastyBites.Manager
 
             stockHistoryGrid.DataSource = dt;
         }
+
+        private void stockBtn_Click(object sender, EventArgs e)
+        {
+            stockPanel.Visible = true; // Show stock panel
+            //ordeerHistoryPanelMD.Visible = false; // Hide order history panel
+            stockPanel.BringToFront(); // Bring stock panel to front
+        }
+
+
+
+
+
 
         private void orderHistorySearchBtn_Click(object sender, EventArgs e)
         {
@@ -122,6 +142,75 @@ namespace TastyBites.Manager
             this.Hide(); // Hide current dashboard
             Login loginForm = new Login();
             loginForm.Show(); // Show login form
+        }
+        //Load Menu items
+        private void LoadMenuItems()
+        {
+            DataAccess db = new DataAccess();
+            DataTable menuItems = db.GetAllMenuItems(); // Create this method in DataAccess
+            DataTable stockItems = db.GetAllMenuStockItems();
+
+            allMenuItems = stockItems; // Store for sorting
+
+            //Menu items shows on the stocks Grid
+            stockGridView.DataSource = stockItems;
+
+
+
+        }
+
+        private void stockSearchBtn_Click(object sender, EventArgs e)
+        {
+            string searchTerm = stockSearchBox.Text.Trim();
+
+            if (string.IsNullOrEmpty(searchTerm))
+            {
+                LoadMenuItems(); // Show all items if search is empty
+                return;
+            }
+
+            DataAccess db = new DataAccess();
+            db.SearchStockMenuItemsByName(searchTerm);
+            DataTable filteredItems = db.SearchStockMenuItemsByName(searchTerm);
+
+            if (filteredItems.Rows.Count == 0)
+            {
+                MessageBox.Show("No matching items found.", "Search Result", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            stockGridView.DataSource = filteredItems;
+        }
+
+        private void showBtn_Click(object sender, EventArgs e)
+        {
+            LoadMenuItems();
+        }
+
+        private void stockSortComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (allMenuItems == null) return;
+
+            string selectedSort = stockSortComboBox.SelectedItem.ToString();
+
+            if (selectedSort == "Low to High")
+            {
+                // Sort ascending by Price
+                DataView dv = allMenuItems.DefaultView;
+                dv.Sort = "Price ASC";
+                stockGridView.DataSource = dv.ToTable();
+            }
+            else if (selectedSort == "High to Low")
+            {
+                // Sort descending by Price
+                DataView dv = allMenuItems.DefaultView;
+                dv.Sort = "Price DESC";
+                stockGridView.DataSource = dv.ToTable();
+            }
+            else
+            {
+                // "Sort by" selected, show original unsorted data
+                stockGridView.DataSource = allMenuItems;
+            }
         }
     }
 }

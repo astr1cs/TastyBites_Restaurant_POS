@@ -32,21 +32,34 @@
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             pictureBox1 = new PictureBox();
             managerLabel = new Label();
             roleLabel = new Label();
             managerName = new Label();
             orderHistoryBtn = new Button();
             panel1 = new Panel();
+            generateBtn = new Button();
+            stockBtn = new Button();
             logoutBtn = new Button();
             orderHistoryShowBtn = new Button();
             orderHistorySearchBtn = new Button();
             orderHistorySearchBox = new TextBox();
             stockHistoryGrid = new DataGridView();
             panel2 = new Panel();
+            stockPanel = new Panel();
+            stockSortComboBox = new ComboBox();
+            showBtn = new Button();
+            stockSearchBtn = new Button();
+            stockSearchBox = new TextBox();
+            stockGridView = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)stockHistoryGrid).BeginInit();
+            stockPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)stockGridView).BeginInit();
             SuspendLayout();
             // 
             // pictureBox1
@@ -93,9 +106,9 @@
             // orderHistoryBtn
             // 
             orderHistoryBtn.Font = new Font("Microsoft Sans Serif", 12F);
-            orderHistoryBtn.Location = new Point(21, 151);
+            orderHistoryBtn.Location = new Point(25, 150);
             orderHistoryBtn.Name = "orderHistoryBtn";
-            orderHistoryBtn.Size = new Size(116, 33);
+            orderHistoryBtn.Size = new Size(115, 30);
             orderHistoryBtn.TabIndex = 35;
             orderHistoryBtn.Text = "Order History";
             orderHistoryBtn.TextAlign = ContentAlignment.MiddleLeft;
@@ -104,6 +117,8 @@
             // 
             // panel1
             // 
+            panel1.Controls.Add(generateBtn);
+            panel1.Controls.Add(stockBtn);
             panel1.Controls.Add(logoutBtn);
             panel1.Controls.Add(orderHistoryBtn);
             panel1.Location = new Point(3, 80);
@@ -111,6 +126,28 @@
             panel1.Size = new Size(155, 653);
             panel1.TabIndex = 45;
             panel1.Paint += panel1_Paint;
+            // 
+            // generateBtn
+            // 
+            generateBtn.Font = new Font("Microsoft Sans Serif", 12F);
+            generateBtn.Location = new Point(25, 197);
+            generateBtn.Name = "generateBtn";
+            generateBtn.Size = new Size(121, 30);
+            generateBtn.TabIndex = 56;
+            generateBtn.Text = "Generate PDF";
+            generateBtn.TextAlign = ContentAlignment.MiddleLeft;
+            generateBtn.UseVisualStyleBackColor = true;
+            // 
+            // stockBtn
+            // 
+            stockBtn.Font = new Font("Microsoft Sans Serif", 12F);
+            stockBtn.Location = new Point(25, 100);
+            stockBtn.Name = "stockBtn";
+            stockBtn.Size = new Size(115, 30);
+            stockBtn.TabIndex = 55;
+            stockBtn.Text = "All Stock List";
+            stockBtn.UseVisualStyleBackColor = true;
+            stockBtn.Click += stockBtn_Click;
             // 
             // logoutBtn
             // 
@@ -200,11 +237,103 @@
             panel2.TabIndex = 54;
             panel2.Paint += panel2_Paint;
             // 
+            // stockPanel
+            // 
+            stockPanel.Controls.Add(stockSortComboBox);
+            stockPanel.Controls.Add(showBtn);
+            stockPanel.Controls.Add(stockSearchBtn);
+            stockPanel.Controls.Add(stockSearchBox);
+            stockPanel.Controls.Add(stockGridView);
+            stockPanel.Location = new Point(158, 80);
+            stockPanel.Name = "stockPanel";
+            stockPanel.Size = new Size(850, 654);
+            stockPanel.TabIndex = 55;
+            // 
+            // stockSortComboBox
+            // 
+            stockSortComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            stockSortComboBox.FormattingEnabled = true;
+            stockSortComboBox.Items.AddRange(new object[] { "Sort By Default", "Low to High", "High to Low" });
+            stockSortComboBox.Location = new Point(697, 5);
+            stockSortComboBox.Name = "stockSortComboBox";
+            stockSortComboBox.Size = new Size(121, 23);
+            stockSortComboBox.TabIndex = 4;
+            stockSortComboBox.SelectedIndexChanged += stockSortComboBox_SelectedIndexChanged;
+            // 
+            // showBtn
+            // 
+            showBtn.Location = new Point(616, 4);
+            showBtn.Name = "showBtn";
+            showBtn.Size = new Size(75, 23);
+            showBtn.TabIndex = 3;
+            showBtn.Text = "Show All";
+            showBtn.UseVisualStyleBackColor = true;
+            showBtn.Click += showBtn_Click;
+            // 
+            // stockSearchBtn
+            // 
+            stockSearchBtn.BackColor = Color.FromArgb(27, 160, 156);
+            stockSearchBtn.ForeColor = Color.White;
+            stockSearchBtn.Location = new Point(535, 4);
+            stockSearchBtn.Name = "stockSearchBtn";
+            stockSearchBtn.Size = new Size(75, 23);
+            stockSearchBtn.TabIndex = 2;
+            stockSearchBtn.Text = "Search";
+            stockSearchBtn.UseVisualStyleBackColor = false;
+            stockSearchBtn.Click += stockSearchBtn_Click;
+            // 
+            // stockSearchBox
+            // 
+            stockSearchBox.Location = new Point(5, 4);
+            stockSearchBox.Name = "stockSearchBox";
+            stockSearchBox.Size = new Size(524, 23);
+            stockSearchBox.TabIndex = 1;
+            // 
+            // stockGridView
+            // 
+            stockGridView.AllowUserToAddRows = false;
+            stockGridView.AllowUserToResizeColumns = false;
+            stockGridView.AllowUserToResizeRows = false;
+            dataGridViewCellStyle4.BackColor = Color.WhiteSmoke;
+            stockGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            stockGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            stockGridView.BackgroundColor = SystemColors.ButtonFace;
+            stockGridView.BorderStyle = BorderStyle.None;
+            stockGridView.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = Color.LightGray;
+            dataGridViewCellStyle5.Font = new Font("Microsoft Sans Serif", 10F);
+            dataGridViewCellStyle5.ForeColor = Color.Black;
+            dataGridViewCellStyle5.SelectionBackColor = Color.LightGray;
+            dataGridViewCellStyle5.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
+            stockGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            stockGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = SystemColors.Window;
+            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle6.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = Color.SteelBlue;
+            dataGridViewCellStyle6.SelectionForeColor = Color.White;
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
+            stockGridView.DefaultCellStyle = dataGridViewCellStyle6;
+            stockGridView.EnableHeadersVisualStyles = false;
+            stockGridView.GridColor = Color.LightGray;
+            stockGridView.Location = new Point(5, 39);
+            stockGridView.MultiSelect = false;
+            stockGridView.Name = "stockGridView";
+            stockGridView.ReadOnly = true;
+            stockGridView.RowHeadersVisible = false;
+            stockGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            stockGridView.Size = new Size(813, 576);
+            stockGridView.TabIndex = 3;
+            // 
             // managerDashboard
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1008, 729);
+            Controls.Add(stockPanel);
             Controls.Add(stockHistoryGrid);
             Controls.Add(orderHistoryShowBtn);
             Controls.Add(roleLabel);
@@ -222,6 +351,9 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)stockHistoryGrid).EndInit();
+            stockPanel.ResumeLayout(false);
+            stockPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)stockGridView).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -240,5 +372,13 @@
         private TextBox orderHistorySearchBox;
         private DataGridView stockHistoryGrid;
         private Panel panel2;
+        private Button stockBtn;
+        private Panel stockPanel;
+        private ComboBox stockSortComboBox;
+        private Button showBtn;
+        private Button stockSearchBtn;
+        private TextBox stockSearchBox;
+        private DataGridView stockGridView;
+        private Button generateBtn;
     }
 }
