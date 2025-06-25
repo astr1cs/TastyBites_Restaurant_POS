@@ -50,16 +50,25 @@
             stockHistoryGrid = new DataGridView();
             panel2 = new Panel();
             stockPanel = new Panel();
+            generatePanel = new Panel();
+            label2 = new Label();
+            label1 = new Label();
+            genBtn = new Button();
+            dateTimePickerEnd = new DateTimePicker();
+            dateTimePickerStart = new DateTimePicker();
             stockSortComboBox = new ComboBox();
             showBtn = new Button();
             stockSearchBtn = new Button();
             stockSearchBox = new TextBox();
             stockGridView = new DataGridView();
+            orderHistoryPanelMD = new Panel();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)stockHistoryGrid).BeginInit();
             stockPanel.SuspendLayout();
+            generatePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)stockGridView).BeginInit();
+            orderHistoryPanelMD.SuspendLayout();
             SuspendLayout();
             // 
             // pictureBox1
@@ -137,6 +146,7 @@
             generateBtn.Text = "Generate PDF";
             generateBtn.TextAlign = ContentAlignment.MiddleLeft;
             generateBtn.UseVisualStyleBackColor = true;
+            generateBtn.Click += generateBtn_Click;
             // 
             // stockBtn
             // 
@@ -164,7 +174,7 @@
             // 
             // orderHistoryShowBtn
             // 
-            orderHistoryShowBtn.Location = new Point(749, 80);
+            orderHistoryShowBtn.Location = new Point(585, 4);
             orderHistoryShowBtn.Name = "orderHistoryShowBtn";
             orderHistoryShowBtn.Size = new Size(75, 23);
             orderHistoryShowBtn.TabIndex = 52;
@@ -176,7 +186,7 @@
             // 
             orderHistorySearchBtn.BackColor = Color.FromArgb(27, 160, 156);
             orderHistorySearchBtn.ForeColor = Color.White;
-            orderHistorySearchBtn.Location = new Point(668, 80);
+            orderHistorySearchBtn.Location = new Point(504, 4);
             orderHistorySearchBtn.Name = "orderHistorySearchBtn";
             orderHistorySearchBtn.Size = new Size(75, 23);
             orderHistorySearchBtn.TabIndex = 51;
@@ -186,7 +196,7 @@
             // 
             // orderHistorySearchBox
             // 
-            orderHistorySearchBox.Location = new Point(348, 80);
+            orderHistorySearchBox.Location = new Point(184, 4);
             orderHistorySearchBox.Name = "orderHistorySearchBox";
             orderHistorySearchBox.Size = new Size(314, 23);
             orderHistorySearchBox.TabIndex = 50;
@@ -221,12 +231,12 @@
             stockHistoryGrid.DefaultCellStyle = dataGridViewCellStyle3;
             stockHistoryGrid.EnableHeadersVisualStyles = false;
             stockHistoryGrid.GridColor = Color.LightGray;
-            stockHistoryGrid.Location = new Point(164, 109);
+            stockHistoryGrid.Location = new Point(3, 33);
             stockHistoryGrid.MultiSelect = false;
             stockHistoryGrid.Name = "stockHistoryGrid";
             stockHistoryGrid.ReadOnly = true;
             stockHistoryGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            stockHistoryGrid.Size = new Size(815, 590);
+            stockHistoryGrid.Size = new Size(812, 585);
             stockHistoryGrid.TabIndex = 53;
             // 
             // panel2
@@ -244,10 +254,67 @@
             stockPanel.Controls.Add(stockSearchBtn);
             stockPanel.Controls.Add(stockSearchBox);
             stockPanel.Controls.Add(stockGridView);
-            stockPanel.Location = new Point(158, 80);
+            stockPanel.Location = new Point(164, 80);
             stockPanel.Name = "stockPanel";
             stockPanel.Size = new Size(850, 654);
             stockPanel.TabIndex = 55;
+            // 
+            // generatePanel
+            // 
+            generatePanel.Controls.Add(label2);
+            generatePanel.Controls.Add(label1);
+            generatePanel.Controls.Add(genBtn);
+            generatePanel.Controls.Add(dateTimePickerEnd);
+            generatePanel.Controls.Add(dateTimePickerStart);
+            generatePanel.Location = new Point(164, 80);
+            generatePanel.Name = "generatePanel";
+            generatePanel.Size = new Size(850, 654);
+            generatePanel.TabIndex = 57;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("MS Reference Sans Serif", 9.75F);
+            label2.Location = new Point(91, 91);
+            label2.Name = "label2";
+            label2.Size = new Size(73, 16);
+            label2.TabIndex = 59;
+            label2.Text = "End Date:";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("MS Reference Sans Serif", 9.75F);
+            label1.Location = new Point(81, 60);
+            label1.Name = "label1";
+            label1.Size = new Size(83, 16);
+            label1.TabIndex = 58;
+            label1.Text = "Start Date:";
+            // 
+            // genBtn
+            // 
+            genBtn.Font = new Font("Microsoft Sans Serif", 12F);
+            genBtn.Location = new Point(170, 131);
+            genBtn.Name = "genBtn";
+            genBtn.Size = new Size(200, 30);
+            genBtn.TabIndex = 57;
+            genBtn.Text = "Generate";
+            genBtn.UseVisualStyleBackColor = true;
+            genBtn.Click += genBtn_Click;
+            // 
+            // dateTimePickerEnd
+            // 
+            dateTimePickerEnd.Location = new Point(170, 91);
+            dateTimePickerEnd.Name = "dateTimePickerEnd";
+            dateTimePickerEnd.Size = new Size(200, 23);
+            dateTimePickerEnd.TabIndex = 61;
+            // 
+            // dateTimePickerStart
+            // 
+            dateTimePickerStart.Location = new Point(170, 62);
+            dateTimePickerStart.Name = "dateTimePickerStart";
+            dateTimePickerStart.Size = new Size(200, 23);
+            dateTimePickerStart.TabIndex = 60;
             // 
             // stockSortComboBox
             // 
@@ -328,22 +395,31 @@
             stockGridView.Size = new Size(813, 576);
             stockGridView.TabIndex = 3;
             // 
+            // orderHistoryPanelMD
+            // 
+            orderHistoryPanelMD.Controls.Add(stockHistoryGrid);
+            orderHistoryPanelMD.Controls.Add(orderHistorySearchBox);
+            orderHistoryPanelMD.Controls.Add(orderHistoryShowBtn);
+            orderHistoryPanelMD.Controls.Add(orderHistorySearchBtn);
+            orderHistoryPanelMD.Location = new Point(169, 81);
+            orderHistoryPanelMD.Name = "orderHistoryPanelMD";
+            orderHistoryPanelMD.Size = new Size(825, 652);
+            orderHistoryPanelMD.TabIndex = 56;
+            // 
             // managerDashboard
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1008, 729);
-            Controls.Add(stockPanel);
-            Controls.Add(stockHistoryGrid);
-            Controls.Add(orderHistoryShowBtn);
+            Controls.Add(generatePanel);
             Controls.Add(roleLabel);
-            Controls.Add(orderHistorySearchBtn);
             Controls.Add(managerName);
-            Controls.Add(orderHistorySearchBox);
             Controls.Add(managerLabel);
             Controls.Add(pictureBox1);
             Controls.Add(panel1);
             Controls.Add(panel2);
+            Controls.Add(orderHistoryPanelMD);
+            Controls.Add(stockPanel);
             Name = "managerDashboard";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Manager Dashboard";
@@ -353,7 +429,11 @@
             ((System.ComponentModel.ISupportInitialize)stockHistoryGrid).EndInit();
             stockPanel.ResumeLayout(false);
             stockPanel.PerformLayout();
+            generatePanel.ResumeLayout(false);
+            generatePanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)stockGridView).EndInit();
+            orderHistoryPanelMD.ResumeLayout(false);
+            orderHistoryPanelMD.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -380,5 +460,12 @@
         private TextBox stockSearchBox;
         private DataGridView stockGridView;
         private Button generateBtn;
+        private Panel orderHistoryPanelMD;
+        private Panel generatePanel;
+        private DateTimePicker dateTimePickerEnd;
+        private DateTimePicker dateTimePickerStart;
+        private Label label2;
+        private Label label1;
+        private Button genBtn;
     }
 }

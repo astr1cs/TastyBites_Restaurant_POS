@@ -3,12 +3,19 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
+using System.IO;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using TastyBites.Database;
 using TastyBites.Models;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+
 
 namespace TastyBites.Manager
 {
@@ -39,14 +46,18 @@ namespace TastyBites.Manager
         {
             LoadStockHistory(); // Load stock history on form load
             LoadMenuItems(); // Load menu items on form load
+            generatePanel.Visible = false;
+            stockPanel.Visible = false;
+            orderHistoryPanelMD.Visible = true;
         }
         //-----------------------------------------------------------SIDEBAR BUTTONS-----------------------------------------------------------
         private void orderHistoryBtn_Click(object sender, EventArgs e)
         {
 
             stockPanel.Visible = false; // Hide stock panel
-            //ordeerHistoryPanelMD.Visible = true; // Show order history panel
-            //ordeerHistoryPanelMD.BringToFront(); // Bring order history panel to front
+            generatePanel.Visible = false;
+            orderHistoryPanelMD.Visible = true; // Show order history panel
+            orderHistoryPanelMD.BringToFront(); // Bring order history panel to front
 
             // This method is called when the "Order History" button is clicked
             string searchTerm = orderHistorySearchBox.Text.Trim();
@@ -69,11 +80,21 @@ namespace TastyBites.Manager
         private void stockBtn_Click(object sender, EventArgs e)
         {
             stockPanel.Visible = true; // Show stock panel
-            //ordeerHistoryPanelMD.Visible = false; // Hide order history panel
+            generatePanel.Visible = false;
+            orderHistoryPanelMD.Visible = false; // Hide order history panel
             stockPanel.BringToFront(); // Bring stock panel to front
         }
 
+        private void generateBtn_Click(object sender, EventArgs e)
+        {
+            stockPanel.Visible = false;
+            orderHistoryPanelMD.Visible = false;
+            generatePanel.Visible = true;
+            generatePanel.BringToFront(); // Bring generate panel to front  
 
+
+
+        }
 
 
 
@@ -212,5 +233,97 @@ namespace TastyBites.Manager
                 stockGridView.DataSource = allMenuItems;
             }
         }
+
+        private void genBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DateTime startDate = dateTimePickerStart.Value.Date;
+                DateTime endDate = dateTimePickerEnd.Value.Date;
+
+                if (endDate < startDate)
+                {
+                    MessageBox.Show("End date must be after start date.", "Invalid Date Range", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                DataAccess db = new DataAccess();
+                DataTable filteredTable = db.GetOrdersByDateRange(startDate, endDate);
+
+                if (filteredTable == null || filteredTable.Rows.Count == 0)
+                {
+                    MessageBox.Show("No orders found in the selected date range.", "No Data", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                SaveFileDialog saveDialog = new SaveFileDialog
+                {
+                    Filter = "PDF Files|*.pdf",
+                    FileName = $"OrderHistory_{startDate:yyyyMMdd}_to_{endDate:yyyyMMdd}.pdf"
+                };
+
+                if (saveDialog.ShowDialog() != DialogResult.OK)
+                    return;
+
+                // Create PDF document
+                iTextSharp.text.Document doc = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4);
+                doc.SetMargins(10f, 10f, 10f, 10f);
+
+                PdfWriter.GetInstance(doc, new FileStream(saveDialog.FileName, FileMode.Create));
+                doc.Open();
+
+                // Title
+                Paragraph title = new Paragraph("Order History Report")
+                {
+                    Alignment = Element.ALIGN_CENTER,
+                    SpacingAfter = 15f
+                };
+                doc.Add(title);
+
+                // Date range subtitle
+                Paragraph dateRange = new Paragraph($"From: {startDate:yyyy-MM-dd}  To: {endDate:yyyy-MM-dd}")
+                {
+                    Alignment = Element.ALIGN_CENTER,
+                    SpacingAfter = 15f
+                };
+                doc.Add(dateRange);
+
+                // Create PDF table with same columns as DataTable
+                PdfPTable table = new PdfPTable(filteredTable.Columns.Count)
+                {
+                    WidthPercentage = 100
+                };
+
+                // Add header cells
+                foreach (DataColumn column in filteredTable.Columns)
+                {
+                    PdfPCell headerCell = new PdfPCell(new Phrase(column.ColumnName))
+                    {
+                        BackgroundColor = BaseColor.LIGHT_GRAY
+                    };
+                    table.AddCell(headerCell);
+                }
+
+                // Add data rows
+                foreach (DataRow row in filteredTable.Rows)
+                {
+                    foreach (object item in row.ItemArray)
+                    {
+                        table.AddCell(item?.ToString() ?? "");
+                    }
+                }
+
+                doc.Add(table);
+                doc.Close();
+
+                MessageBox.Show("PDF Generated Successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error while generating PDF:\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
     }
 }

@@ -306,6 +306,37 @@ namespace TastyBites.Database
                 return dt;
             }
         }
+        public DataTable GetOrdersByDateRange(DateTime start, DateTime end)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = @"
+SELECT 
+    o.OrderID,
+    o.OrderDateTime,
+    o.TotalAmount,
+    u.Username,
+    u.Role,
+    m.Name AS MenuItemName,
+    oi.Quantity,
+    oi.ItemPriceAtOrderTime
+FROM [Order] o
+INNER JOIN Users u ON o.UserID = u.UserID
+INNER JOIN OrderItem oi ON o.OrderID = oi.OrderID
+INNER JOIN MenuItem m ON oi.MenuItemID = m.MenuItemID
+WHERE o.OrderDateTime BETWEEN @start AND @end
+ORDER BY o.OrderID DESC";
+
+                SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
+                adapter.SelectCommand.Parameters.AddWithValue("@start", start);
+                adapter.SelectCommand.Parameters.AddWithValue("@end", end);
+
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+                return dt;
+            }
+        }
+
         public DataTable searchOrderHistory(string searchTerm)
         {
             using (SqlConnection conn = new SqlConnection(connectionString))
