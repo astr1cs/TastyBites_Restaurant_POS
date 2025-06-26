@@ -133,7 +133,7 @@ namespace TastyBites.Staff
 
         private void logoutBtn_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void dataGridView3_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -362,9 +362,71 @@ namespace TastyBites.Staff
 
         }
 
+        //private void placeOrderBtn_Click(object sender, EventArgs e)
+        //{
+        //    // Check payment method
+        //    if (!cardRadio.Checked && !cashRadio.Checked)
+        //    {
+        //        MessageBox.Show("Please select a payment method.");
+        //        return;
+        //    }
+
+        //    string paymentMethod = cardRadio.Checked ? "Card" : "Cash";
+        //    string delivery = takeaWayCombo.SelectedIndex == 0 ? "Dine-in" : "Takeaway";
+
+        //    decimal totalAmount = 0;
+        //    List<OrderItemModel> orderItems = new List<OrderItemModel>();
+
+        //    DataAccess db = new DataAccess();
+
+        //    foreach (DataGridViewRow row in staffOrderGridBox.Rows)
+        //    {
+        //        if (row.IsNewRow) continue;
+
+        //        string menuName = Convert.ToString(row.Cells["Name"].Value);
+        //        decimal price = Convert.ToDecimal(row.Cells["Price"].Value);
+        //        int quantity = Convert.ToInt32(row.Cells["Qty"].Value);
+
+        //        totalAmount += price * quantity;
+
+        //        int menuItemId = db.GetMenuItemIdByName(menuName);
+
+        //        orderItems.Add(new OrderItemModel
+        //        {
+        //            MenuItemID = menuItemId,
+        //            Quantity = quantity,
+        //            ItemPriceAtOrderTime = price
+        //        });
+        //    }
+
+        //    int userId = currentUser.UserID;
+
+        //    int orderId = db.InsertOrder(userId, DateTime.Now, delivery, paymentMethod, totalAmount);
+
+        //    foreach (var item in orderItems)
+        //    {
+        //        db.InsertOrderItem(orderId, item.MenuItemID, item.Quantity, item.ItemPriceAtOrderTime);
+        //        // **NEW**: decrement the stock
+        //        int rowsAffected = db.DecrementMenuItemStock(item.MenuItemID, item.Quantity);
+        //        if (rowsAffected == 0)
+        //        {
+        //            // handle the case where stock update failed (e.g. no such MenuItemID)
+        //            MessageBox.Show($"Failed to update stock for item ID {item.MenuItemID}");
+        //        }
+        //    }
+
+        //    MessageBox.Show("Order placed successfully!");
+
+        //    // Clear the list and table
+        //    orderItems.Clear();
+        //    orderTable.Rows.Clear(); // optional if RefreshOrderGridBox is called next
+        //    subTotalBox.Text = "0.00"; // Reset subtotal display
+
+
+
+        //}
         private void placeOrderBtn_Click(object sender, EventArgs e)
         {
-            // Check payment method
             if (!cardRadio.Checked && !cashRadio.Checked)
             {
                 MessageBox.Show("Please select a payment method.");
@@ -373,12 +435,11 @@ namespace TastyBites.Staff
 
             string paymentMethod = cardRadio.Checked ? "Card" : "Cash";
             string delivery = takeaWayCombo.SelectedIndex == 0 ? "Dine-in" : "Takeaway";
-
             decimal totalAmount = 0;
             List<OrderItemModel> orderItems = new List<OrderItemModel>();
-
             DataAccess db = new DataAccess();
 
+            // ✅ 1st Pass: Check stock before placing order
             foreach (DataGridViewRow row in staffOrderGridBox.Rows)
             {
                 if (row.IsNewRow) continue;
@@ -387,9 +448,16 @@ namespace TastyBites.Staff
                 decimal price = Convert.ToDecimal(row.Cells["Price"].Value);
                 int quantity = Convert.ToInt32(row.Cells["Qty"].Value);
 
-                totalAmount += price * quantity;
-
                 int menuItemId = db.GetMenuItemIdByName(menuName);
+                int currentStock = db.GetMenuItemStock(menuItemId);
+
+                if (currentStock < quantity)
+                {
+                    MessageBox.Show($"Not enough stock for \"{menuName}\".\nAvailable: {currentStock}, Requested: {quantity}");
+                    return;
+                }
+
+                totalAmount += price * quantity;
 
                 orderItems.Add(new OrderItemModel
                 {
@@ -399,25 +467,24 @@ namespace TastyBites.Staff
                 });
             }
 
+            // ✅ Stock is okay for all, now place the order
             int userId = currentUser.UserID;
-
             int orderId = db.InsertOrder(userId, DateTime.Now, delivery, paymentMethod, totalAmount);
 
             foreach (var item in orderItems)
             {
                 db.InsertOrderItem(orderId, item.MenuItemID, item.Quantity, item.ItemPriceAtOrderTime);
+                db.DecrementMenuItemStock(item.MenuItemID, item.Quantity);
             }
 
             MessageBox.Show("Order placed successfully!");
 
-            // Clear the list and table
+            // ✅ Reset form
             orderItems.Clear();
-            orderTable.Rows.Clear(); // optional if RefreshOrderGridBox is called next
-            subTotalBox.Text = "0.00"; // Reset subtotal display
-
-
-
+            orderTable.Rows.Clear();
+            subTotalBox.Text = "0.00";
         }
+
 
 
 
@@ -426,6 +493,73 @@ namespace TastyBites.Staff
             this.Hide();
             Login loginForm = new Login();
             loginForm.Show();
+        }
+
+        private void staffCategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (allMenuItems == null)
+                return;
+
+            string selectedCategory = staffCategoryComboBox.SelectedItem?.ToString();
+
+            if (string.IsNullOrEmpty(selectedCategory) || selectedCategory == "All")
+            {
+                // Show all items if "All" or nothing selected
+                staffDataGrid.DataSource = allMenuItems;
+            }
+            else
+            {
+                // Filter rows by selected category
+                var filteredRows = allMenuItems.AsEnumerable()
+                    .Where(row => row.Field<string>("CategoryName").Equals(selectedCategory, StringComparison.OrdinalIgnoreCase));
+
+                if (filteredRows.Any())
+                {
+                    DataTable filteredTable = filteredRows.CopyToDataTable();
+                    staffDataGrid.DataSource = filteredTable;
+                }
+                else
+                {
+                    // No match, show empty table with same structure
+                    staffDataGrid.DataSource = allMenuItems.Clone();
+                }
+            }
+        }
+
+        private void staffPriceSortComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (allMenuItems == null) return;
+
+            string selectedSort = staffPriceSortComboBox.SelectedItem?.ToString();
+
+            if (string.IsNullOrEmpty(selectedSort) || selectedSort == "Default" || selectedSort == "None")
+            {
+                // Show original unsorted data
+                staffDataGrid.DataSource = allMenuItems;
+                return;
+            }
+
+            DataView dv = allMenuItems.DefaultView;
+
+            if (selectedSort == "Low to High")
+            {
+                dv.Sort = "Price ASC";
+            }
+            else if (selectedSort == "High to Low")
+            {
+                dv.Sort = "Price DESC";
+            }
+            else
+            {
+                dv.Sort = ""; // no sort
+            }
+
+            staffDataGrid.DataSource = dv.ToTable();
+        }
+
+        private void staffSearchBox_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

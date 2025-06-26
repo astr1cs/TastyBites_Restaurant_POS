@@ -32,9 +32,9 @@ namespace TastyBites.Staff
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StaffDashboard));
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             FavIcon = new PictureBox();
             placeOrderBtn = new Button();
             label1 = new Label();
@@ -177,12 +177,13 @@ namespace TastyBites.Staff
             // palestineTextBox
             // 
             palestineTextBox.Font = new Font("MS Reference Sans Serif", 8.25F);
-            palestineTextBox.Location = new Point(908, 490);
+            palestineTextBox.Location = new Point(873, 513);
             palestineTextBox.Name = "palestineTextBox";
             palestineTextBox.RightToLeft = RightToLeft.Yes;
-            palestineTextBox.Size = new Size(77, 21);
+            palestineTextBox.Size = new Size(112, 21);
             palestineTextBox.TabIndex = 15;
-            palestineTextBox.Text = "$10.89";
+            palestineTextBox.Text = "Coming Soon";
+            palestineTextBox.TextAlign = HorizontalAlignment.Center;
             // 
             // roleNameLabel
             // 
@@ -213,6 +214,7 @@ namespace TastyBites.Staff
             staffSearchBox.Name = "staffSearchBox";
             staffSearchBox.Size = new Size(424, 23);
             staffSearchBox.TabIndex = 20;
+            staffSearchBox.TextChanged += staffSearchBox_TextChanged;
             // 
             // panel1
             // 
@@ -229,29 +231,29 @@ namespace TastyBites.Staff
             // 
             staffDataGrid.AllowUserToAddRows = false;
             staffDataGrid.AllowUserToResizeColumns = false;
-            dataGridViewCellStyle7.BackColor = Color.WhiteSmoke;
-            staffDataGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.BackColor = Color.WhiteSmoke;
+            staffDataGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             staffDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             staffDataGrid.BackgroundColor = SystemColors.ButtonFace;
             staffDataGrid.BorderStyle = BorderStyle.None;
             staffDataGrid.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = Color.LightSteelBlue;
-            dataGridViewCellStyle8.Font = new Font("Microsoft Sans Serif", 10F);
-            dataGridViewCellStyle8.ForeColor = Color.Black;
-            dataGridViewCellStyle8.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.True;
-            staffDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.LightSteelBlue;
+            dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 10F);
+            dataGridViewCellStyle2.ForeColor = Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            staffDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             staffDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = SystemColors.Window;
-            dataGridViewCellStyle9.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle9.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle9.SelectionBackColor = Color.SteelBlue;
-            dataGridViewCellStyle9.SelectionForeColor = Color.White;
-            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.False;
-            staffDataGrid.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Window;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = Color.SteelBlue;
+            dataGridViewCellStyle3.SelectionForeColor = Color.White;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            staffDataGrid.DefaultCellStyle = dataGridViewCellStyle3;
             staffDataGrid.EnableHeadersVisualStyles = false;
             staffDataGrid.GridColor = Color.LightGray;
             staffDataGrid.Location = new Point(5, 47);
@@ -303,15 +305,17 @@ namespace TastyBites.Staff
             staffPriceSortComboBox.Name = "staffPriceSortComboBox";
             staffPriceSortComboBox.Size = new Size(121, 23);
             staffPriceSortComboBox.TabIndex = 23;
+            staffPriceSortComboBox.SelectedIndexChanged += staffPriceSortComboBox_SelectedIndexChanged;
             // 
             // staffCategoryComboBox
             // 
             staffCategoryComboBox.FormattingEnabled = true;
-            staffCategoryComboBox.Items.AddRange(new object[] { "Drinks", "Main", "Dessert" });
+            staffCategoryComboBox.Items.AddRange(new object[] { "Drinks", "Main", "Desserts" });
             staffCategoryComboBox.Location = new Point(12, 197);
             staffCategoryComboBox.Name = "staffCategoryComboBox";
             staffCategoryComboBox.Size = new Size(121, 23);
             staffCategoryComboBox.TabIndex = 24;
+            staffCategoryComboBox.SelectedIndexChanged += staffCategoryComboBox_SelectedIndexChanged;
             // 
             // contextMenu
             // 

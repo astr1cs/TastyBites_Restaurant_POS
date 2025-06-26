@@ -184,17 +184,35 @@ namespace TastyBites.Database
             }
         }
         //Search Stock Menu by Names
-        public DataTable SearchStockMenuItemsByName(string keyword)
+        //public DataTable SearchStockMenuItemsByName(string keyword)
+        //{
+        //    using (SqlConnection conn = new SqlConnection(connectionString))
+        //    {
+        //        string query = @"
+        //    SELECT m.Name, m.Price, m.StockQuantity, c.CategoryName
+        //    FROM MenuItem m
+        //    INNER JOIN Category c ON m.CategoryID = c.CategoryID
+        //    WHERE m.Name LIKE @Keyword";
+        //        SqlCommand cmd = new SqlCommand(query, conn);
+        //        cmd.Parameters.AddWithValue("@Keyword", "%" + keyword + "%");
+
+        //        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+        //        DataTable dt = new DataTable();
+        //        adapter.Fill(dt);
+        //        return dt;
+        //    }
+        //}
+        public DataTable SearchStockMenuItemsByName(string searchText)
         {
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                string query = @"
-            SELECT m.Name, m.Price, m.StockQuantity, c.CategoryName
-            FROM MenuItem m
-            INNER JOIN Category c ON m.CategoryID = c.CategoryID
-            WHERE m.Name LIKE @Keyword";
+                string query = @"SELECT m.MenuItemID, m.Name, m.Price, m.StockQuantity, c.CategoryName
+                         FROM MenuItem m
+                         INNER JOIN Category c ON m.CategoryID = c.CategoryID
+                         WHERE LOWER(m.Name) LIKE '%' + @search + '%'";
+
                 SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@Keyword", "%" + keyword + "%");
+                cmd.Parameters.AddWithValue("@search", searchText.ToLower());
 
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
@@ -202,6 +220,7 @@ namespace TastyBites.Database
                 return dt;
             }
         }
+
         //Search User by Name
         public DataTable SearchUsersByUsername(string keyword)
         {
@@ -434,5 +453,31 @@ ORDER BY o.OrderID DESC";
 
 
         }
+        public int DecrementMenuItemStock(int menuItemId, int quantitySold)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(
+                "UPDATE MenuItem SET StockQuantity = StockQuantity - @qty WHERE MenuItemID = @id", conn))
+            {
+                cmd.Parameters.AddWithValue("@qty", quantitySold);
+                cmd.Parameters.AddWithValue("@id", menuItemId);
+                conn.Open();
+                return cmd.ExecuteNonQuery(); // returns number of affected rows
+            }
+        }
+
+        public int GetMenuItemStock(int menuItemId)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand("SELECT StockQuantity FROM MenuItem WHERE MenuItemID = @id", conn))
+            {
+                cmd.Parameters.AddWithValue("@id", menuItemId);
+                conn.Open();
+                object result = cmd.ExecuteScalar();
+                return result != null ? Convert.ToInt32(result) : -1; // -1 if not found
+            }
+        }
+
+
     }
 }

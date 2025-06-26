@@ -12,6 +12,8 @@ namespace TastyBites
         public Login()
         {
             InitializeComponent();
+            //this.Icon = new Icon("../favIcico.ico");
+            //this.Icon = Properties.Resources.favIcico;
         }
 
         private void label1_Click(object sender, EventArgs e)
