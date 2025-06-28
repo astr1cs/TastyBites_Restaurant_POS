@@ -74,8 +74,9 @@ namespace TastyBites.Staff
             // 
             FavIcon.Image = (Image)resources.GetObject("FavIcon.Image");
             FavIcon.Location = new Point(0, 0);
+            FavIcon.Margin = new Padding(3, 4, 3, 4);
             FavIcon.Name = "FavIcon";
-            FavIcon.Size = new Size(136, 72);
+            FavIcon.Size = new Size(155, 96);
             FavIcon.TabIndex = 0;
             FavIcon.TabStop = false;
             // 
@@ -83,9 +84,10 @@ namespace TastyBites.Staff
             // 
             placeOrderBtn.BackColor = Color.FromArgb(27, 160, 154);
             placeOrderBtn.ForeColor = Color.White;
-            placeOrderBtn.Location = new Point(769, 658);
+            placeOrderBtn.Location = new Point(879, 877);
+            placeOrderBtn.Margin = new Padding(3, 4, 3, 4);
             placeOrderBtn.Name = "placeOrderBtn";
-            placeOrderBtn.Size = new Size(201, 31);
+            placeOrderBtn.Size = new Size(230, 41);
             placeOrderBtn.TabIndex = 2;
             placeOrderBtn.Text = "Place Order";
             placeOrderBtn.UseVisualStyleBackColor = false;
@@ -95,9 +97,9 @@ namespace TastyBites.Staff
             // 
             label1.AutoSize = true;
             label1.Font = new Font("MS Reference Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(770, 90);
+            label1.Location = new Point(880, 120);
             label1.Name = "label1";
-            label1.Size = new Size(83, 16);
+            label1.Size = new Size(99, 19);
             label1.TabIndex = 3;
             label1.Text = "Order Items";
             // 
@@ -105,28 +107,29 @@ namespace TastyBites.Staff
             // 
             label2.AutoSize = true;
             label2.Font = new Font("MS Reference Sans Serif", 11.25F);
-            label2.Location = new Point(769, 424);
+            label2.Location = new Point(879, 565);
             label2.Name = "label2";
-            label2.Size = new Size(153, 19);
+            label2.Size = new Size(189, 24);
             label2.TabIndex = 4;
             label2.Text = "Payment Summery";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(770, 577);
+            label3.Location = new Point(880, 769);
             label3.Name = "label3";
-            label3.Size = new Size(99, 15);
+            label3.Size = new Size(121, 20);
             label3.TabIndex = 5;
             label3.Text = "Payment Method";
             // 
             // cashRadio
             // 
             cashRadio.AutoSize = true;
-            cashRadio.Location = new Point(769, 606);
+            cashRadio.Location = new Point(879, 808);
+            cashRadio.Margin = new Padding(3, 4, 3, 4);
             cashRadio.Name = "cashRadio";
-            cashRadio.Padding = new Padding(10, 0, 10, 0);
-            cashRadio.Size = new Size(71, 19);
+            cashRadio.Padding = new Padding(11, 0, 11, 0);
+            cashRadio.Size = new Size(83, 24);
             cashRadio.TabIndex = 6;
             cashRadio.TabStop = true;
             cashRadio.Text = "Cash";
@@ -135,10 +138,11 @@ namespace TastyBites.Staff
             // cardRadio
             // 
             cardRadio.AutoSize = true;
-            cardRadio.Location = new Point(838, 607);
+            cardRadio.Location = new Point(958, 809);
+            cardRadio.Margin = new Padding(3, 4, 3, 4);
             cardRadio.Name = "cardRadio";
-            cardRadio.Padding = new Padding(10, 0, 10, 0);
-            cardRadio.Size = new Size(70, 19);
+            cardRadio.Padding = new Padding(11, 0, 11, 0);
+            cardRadio.Size = new Size(83, 24);
             cardRadio.TabIndex = 7;
             cardRadio.TabStop = true;
             cardRadio.Text = "Card";
@@ -148,9 +152,10 @@ namespace TastyBites.Staff
             // 
             takeaWayCombo.FormattingEnabled = true;
             takeaWayCombo.Items.AddRange(new object[] { "Dine-in", "Takeway" });
-            takeaWayCombo.Location = new Point(914, 606);
+            takeaWayCombo.Location = new Point(1045, 808);
+            takeaWayCombo.Margin = new Padding(3, 4, 3, 4);
             takeaWayCombo.Name = "takeaWayCombo";
-            takeaWayCombo.Size = new Size(69, 23);
+            takeaWayCombo.Size = new Size(78, 28);
             takeaWayCombo.TabIndex = 8;
             takeaWayCombo.Text = "Dine-in";
             // 
@@ -158,9 +163,9 @@ namespace TastyBites.Staff
             // 
             label4.AutoSize = true;
             label4.Font = new Font("MS Reference Sans Serif", 11.25F);
-            label4.Location = new Point(769, 461);
+            label4.Location = new Point(879, 615);
             label4.Name = "label4";
-            label4.Size = new Size(78, 19);
+            label4.Size = new Size(99, 24);
             label4.TabIndex = 9;
             label4.Text = "Subtotal:";
             // 
@@ -168,19 +173,20 @@ namespace TastyBites.Staff
             // 
             label8.AutoSize = true;
             label8.Font = new Font("MS Reference Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label8.Location = new Point(770, 493);
+            label8.Location = new Point(880, 657);
             label8.Name = "label8";
-            label8.Size = new Size(138, 15);
+            label8.Size = new Size(169, 18);
             label8.TabIndex = 13;
             label8.Text = "Donation for Palestine:";
             // 
             // palestineTextBox
             // 
             palestineTextBox.Font = new Font("MS Reference Sans Serif", 8.25F);
-            palestineTextBox.Location = new Point(873, 513);
+            palestineTextBox.Location = new Point(998, 684);
+            palestineTextBox.Margin = new Padding(3, 4, 3, 4);
             palestineTextBox.Name = "palestineTextBox";
             palestineTextBox.RightToLeft = RightToLeft.Yes;
-            palestineTextBox.Size = new Size(112, 21);
+            palestineTextBox.Size = new Size(127, 24);
             palestineTextBox.TabIndex = 15;
             palestineTextBox.Text = "Coming Soon";
             palestineTextBox.TextAlign = HorizontalAlignment.Center;
@@ -189,10 +195,10 @@ namespace TastyBites.Staff
             // 
             roleNameLabel.AutoSize = true;
             roleNameLabel.Font = new Font("MS Reference Sans Serif", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            roleNameLabel.Location = new Point(807, 9);
+            roleNameLabel.Location = new Point(922, 12);
             roleNameLabel.Name = "roleNameLabel";
-            roleNameLabel.Padding = new Padding(10, 0, 10, 0);
-            roleNameLabel.Size = new Size(170, 24);
+            roleNameLabel.Padding = new Padding(11, 0, 11, 0);
+            roleNameLabel.Size = new Size(211, 29);
             roleNameLabel.TabIndex = 16;
             roleNameLabel.Text = "MERAZ UDDIN";
             // 
@@ -201,18 +207,19 @@ namespace TastyBites.Staff
             Staff.AutoSize = true;
             Staff.Font = new Font("MS Reference Sans Serif", 8.25F);
             Staff.ForeColor = SystemColors.ControlDarkDark;
-            Staff.Location = new Point(811, 32);
+            Staff.Location = new Point(927, 43);
             Staff.Name = "Staff";
-            Staff.Padding = new Padding(10, 0, 10, 0);
-            Staff.Size = new Size(54, 15);
+            Staff.Padding = new Padding(11, 0, 11, 0);
+            Staff.Size = new Size(64, 18);
             Staff.TabIndex = 17;
             Staff.Text = "Staff";
             // 
             // staffSearchBox
             // 
-            staffSearchBox.Location = new Point(5, 10);
+            staffSearchBox.Location = new Point(6, 13);
+            staffSearchBox.Margin = new Padding(3, 4, 3, 4);
             staffSearchBox.Name = "staffSearchBox";
-            staffSearchBox.Size = new Size(424, 23);
+            staffSearchBox.Size = new Size(484, 27);
             staffSearchBox.TabIndex = 20;
             staffSearchBox.TextChanged += staffSearchBox_TextChanged;
             // 
@@ -222,9 +229,10 @@ namespace TastyBites.Staff
             panel1.Controls.Add(staffAllMenuBtn);
             panel1.Controls.Add(staffSearchBtn);
             panel1.Controls.Add(staffSearchBox);
-            panel1.Location = new Point(161, 78);
+            panel1.Location = new Point(184, 104);
+            panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(589, 653);
+            panel1.Size = new Size(673, 871);
             panel1.TabIndex = 21;
             // 
             // staffDataGrid
@@ -245,6 +253,7 @@ namespace TastyBites.Staff
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
             staffDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            staffDataGrid.ColumnHeadersHeight = 29;
             staffDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = SystemColors.Window;
@@ -256,22 +265,25 @@ namespace TastyBites.Staff
             staffDataGrid.DefaultCellStyle = dataGridViewCellStyle3;
             staffDataGrid.EnableHeadersVisualStyles = false;
             staffDataGrid.GridColor = Color.LightGray;
-            staffDataGrid.Location = new Point(5, 47);
+            staffDataGrid.Location = new Point(6, 63);
+            staffDataGrid.Margin = new Padding(3, 4, 3, 4);
             staffDataGrid.MultiSelect = false;
             staffDataGrid.Name = "staffDataGrid";
             staffDataGrid.ReadOnly = true;
             staffDataGrid.RowHeadersVisible = false;
+            staffDataGrid.RowHeadersWidth = 51;
             staffDataGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            staffDataGrid.Size = new Size(584, 615);
+            staffDataGrid.Size = new Size(667, 820);
             staffDataGrid.TabIndex = 23;
             staffDataGrid.CellContentClick += staffDataGrid_CellContentClick;
             // 
             // staffAllMenuBtn
             // 
             staffAllMenuBtn.Font = new Font("MS Reference Sans Serif", 8.25F);
-            staffAllMenuBtn.Location = new Point(516, 10);
+            staffAllMenuBtn.Location = new Point(590, 13);
+            staffAllMenuBtn.Margin = new Padding(3, 4, 3, 4);
             staffAllMenuBtn.Name = "staffAllMenuBtn";
-            staffAllMenuBtn.Size = new Size(75, 23);
+            staffAllMenuBtn.Size = new Size(86, 31);
             staffAllMenuBtn.TabIndex = 22;
             staffAllMenuBtn.Text = "All Menu";
             staffAllMenuBtn.UseVisualStyleBackColor = true;
@@ -280,9 +292,10 @@ namespace TastyBites.Staff
             // staffSearchBtn
             // 
             staffSearchBtn.Font = new Font("MS Reference Sans Serif", 8.25F);
-            staffSearchBtn.Location = new Point(435, 10);
+            staffSearchBtn.Location = new Point(497, 13);
+            staffSearchBtn.Margin = new Padding(3, 4, 3, 4);
             staffSearchBtn.Name = "staffSearchBtn";
-            staffSearchBtn.Size = new Size(75, 23);
+            staffSearchBtn.Size = new Size(86, 31);
             staffSearchBtn.TabIndex = 21;
             staffSearchBtn.Text = "Search";
             staffSearchBtn.UseVisualStyleBackColor = true;
@@ -291,9 +304,9 @@ namespace TastyBites.Staff
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(12, 125);
+            label9.Location = new Point(14, 167);
             label9.Name = "label9";
-            label9.Size = new Size(41, 15);
+            label9.Size = new Size(51, 20);
             label9.TabIndex = 22;
             label9.Text = "Filters:";
             // 
@@ -301,9 +314,10 @@ namespace TastyBites.Staff
             // 
             staffPriceSortComboBox.FormattingEnabled = true;
             staffPriceSortComboBox.Items.AddRange(new object[] { "Sort By Default", "Low to High", "High to Low" });
-            staffPriceSortComboBox.Location = new Point(12, 157);
+            staffPriceSortComboBox.Location = new Point(14, 209);
+            staffPriceSortComboBox.Margin = new Padding(3, 4, 3, 4);
             staffPriceSortComboBox.Name = "staffPriceSortComboBox";
-            staffPriceSortComboBox.Size = new Size(121, 23);
+            staffPriceSortComboBox.Size = new Size(138, 28);
             staffPriceSortComboBox.TabIndex = 23;
             staffPriceSortComboBox.SelectedIndexChanged += staffPriceSortComboBox_SelectedIndexChanged;
             // 
@@ -311,30 +325,34 @@ namespace TastyBites.Staff
             // 
             staffCategoryComboBox.FormattingEnabled = true;
             staffCategoryComboBox.Items.AddRange(new object[] { "Drinks", "Main", "Desserts" });
-            staffCategoryComboBox.Location = new Point(12, 197);
+            staffCategoryComboBox.Location = new Point(14, 263);
+            staffCategoryComboBox.Margin = new Padding(3, 4, 3, 4);
             staffCategoryComboBox.Name = "staffCategoryComboBox";
-            staffCategoryComboBox.Size = new Size(121, 23);
+            staffCategoryComboBox.Size = new Size(138, 28);
             staffCategoryComboBox.TabIndex = 24;
             staffCategoryComboBox.SelectedIndexChanged += staffCategoryComboBox_SelectedIndexChanged;
             // 
             // contextMenu
             // 
+            contextMenu.ImageScalingSize = new Size(20, 20);
             contextMenu.Items.AddRange(new ToolStripItem[] { removeItem });
             contextMenu.Name = "contextMenu";
-            contextMenu.Size = new Size(68, 26);
+            contextMenu.Size = new Size(70, 26);
             // 
             // removeItem
             // 
             removeItem.Name = "removeItem";
-            removeItem.Size = new Size(67, 22);
+            removeItem.Size = new Size(69, 22);
             // 
             // subTotalBox
             // 
             subTotalBox.Font = new Font("MS Reference Sans Serif", 8.25F);
-            subTotalBox.Location = new Point(873, 461);
+            subTotalBox.Location = new Point(998, 615);
+            subTotalBox.Margin = new Padding(3, 4, 3, 4);
             subTotalBox.Name = "subTotalBox";
+            subTotalBox.ReadOnly = true;
             subTotalBox.RightToLeft = RightToLeft.Yes;
-            subTotalBox.Size = new Size(112, 21);
+            subTotalBox.Size = new Size(127, 24);
             subTotalBox.TabIndex = 26;
             subTotalBox.TextChanged += subTotalBox_TextChanged;
             // 
@@ -343,9 +361,10 @@ namespace TastyBites.Staff
             logoutBtn.BackColor = Color.FromArgb(27, 160, 156);
             logoutBtn.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             logoutBtn.ForeColor = Color.White;
-            logoutBtn.Location = new Point(12, 659);
+            logoutBtn.Location = new Point(14, 879);
+            logoutBtn.Margin = new Padding(3, 4, 3, 4);
             logoutBtn.Name = "logoutBtn";
-            logoutBtn.Size = new Size(128, 31);
+            logoutBtn.Size = new Size(146, 41);
             logoutBtn.TabIndex = 27;
             logoutBtn.Text = "Logout";
             logoutBtn.UseVisualStyleBackColor = false;
@@ -354,16 +373,18 @@ namespace TastyBites.Staff
             // panel3
             // 
             panel3.Location = new Point(0, -1);
+            panel3.Margin = new Padding(3, 4, 3, 4);
             panel3.Name = "panel3";
-            panel3.Size = new Size(1008, 75);
+            panel3.Size = new Size(1152, 100);
             panel3.TabIndex = 46;
             panel3.Paint += panel3_Paint;
             // 
             // panel2
             // 
-            panel2.Location = new Point(0, 78);
+            panel2.Location = new Point(0, 104);
+            panel2.Margin = new Padding(3, 4, 3, 4);
             panel2.Name = "panel2";
-            panel2.Size = new Size(155, 653);
+            panel2.Size = new Size(177, 871);
             panel2.TabIndex = 47;
             panel2.Paint += panel2_Paint_1;
             // 
@@ -373,19 +394,21 @@ namespace TastyBites.Staff
             staffOrderGridBox.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             staffOrderGridBox.BackgroundColor = SystemColors.Window;
             staffOrderGridBox.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            staffOrderGridBox.Location = new Point(756, 125);
+            staffOrderGridBox.Location = new Point(864, 167);
+            staffOrderGridBox.Margin = new Padding(3, 4, 3, 4);
             staffOrderGridBox.Name = "staffOrderGridBox";
             staffOrderGridBox.RowHeadersVisible = false;
-            staffOrderGridBox.Size = new Size(240, 278);
+            staffOrderGridBox.RowHeadersWidth = 51;
+            staffOrderGridBox.Size = new Size(274, 371);
             staffOrderGridBox.TabIndex = 48;
             staffOrderGridBox.CellClick += staffOrderGridBox_CellClick;
             staffOrderGridBox.CellContentClick += staffOrderGridBox_CellContentClick;
             // 
             // StaffDashboard
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1008, 729);
+            ClientSize = new Size(1152, 972);
             Controls.Add(staffOrderGridBox);
             Controls.Add(Staff);
             Controls.Add(roleNameLabel);
@@ -408,6 +431,7 @@ namespace TastyBites.Staff
             Controls.Add(label1);
             Controls.Add(placeOrderBtn);
             Controls.Add(panel2);
+            Margin = new Padding(3, 4, 3, 4);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "StaffDashboard";
