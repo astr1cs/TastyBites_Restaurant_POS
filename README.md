@@ -87,6 +87,18 @@ At **Tasty Bites**, a busy local restaurant:
 - The **Manager (Ahsanul)** monitors ongoing operations, evaluates item performance, and generates reports to help the team make informed decisions.
 
 This system reduces human error, enhances workflow, and supports business growth.
+## 📸 Screenshots
+
+### 👑 Admin Dashboard
+![Admin Dashboard](assets/admin.png)
+
+
+### 🔐 Manager Dashboard
+![Login](assets/manager.png)
+
+
+### 🧑‍🍳 Staff Order Interface
+![Staff Order Form](assets/staff.png)
 
 ---
 
