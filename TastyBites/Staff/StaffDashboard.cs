@@ -36,7 +36,9 @@ namespace TastyBites.Staff
             InitializeComponent();
             currentUser = user;
             roleNameLabel.Text = user.Username;
-            staffDataGrid.CellContentClick += staffDataGrid_CellContentClick;
+            staffPriceSortComboBox.Text = "Sort by Price";
+            staffCategoryComboBox.Text = "Sort by Category"; // Reset category filter
+            //staffDataGrid.CellContentClick += staffDataGrid_CellContentClick;
             // You can show the role or other details if needed
             //roleLabel.Text = "Role: " + user.Role;
             //InitializeOrderTable();
@@ -313,6 +315,7 @@ namespace TastyBites.Staff
 
             }
         }
+
         private void AddItemToOrder(int id, string name, decimal price)
         {
             var existing = orderItems.FirstOrDefault(x => x.Id == id);

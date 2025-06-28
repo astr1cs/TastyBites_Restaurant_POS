@@ -30,6 +30,8 @@ namespace TastyBites
             currentUser = user;
             userName.Text = user.Username;
             this.Load += AdminDashboard_Load;
+
+            stockSortComboBox.Text = "Sort by"; // Set default text for the combo box
             // You can show the role or other details if needed
             //roleLabel.Text = "Role: " + user.Role;
         }
