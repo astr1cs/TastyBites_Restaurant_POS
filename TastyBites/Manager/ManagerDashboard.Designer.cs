@@ -236,7 +236,7 @@
             stockHistoryGrid.Name = "stockHistoryGrid";
             stockHistoryGrid.ReadOnly = true;
             stockHistoryGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            stockHistoryGrid.Size = new Size(812, 585);
+            stockHistoryGrid.Size = new Size(831, 585);
             stockHistoryGrid.TabIndex = 53;
             // 
             // panel2
@@ -401,9 +401,9 @@
             orderHistoryPanelMD.Controls.Add(orderHistorySearchBox);
             orderHistoryPanelMD.Controls.Add(orderHistoryShowBtn);
             orderHistoryPanelMD.Controls.Add(orderHistorySearchBtn);
-            orderHistoryPanelMD.Location = new Point(169, 81);
+            orderHistoryPanelMD.Location = new Point(164, 81);
             orderHistoryPanelMD.Name = "orderHistoryPanelMD";
-            orderHistoryPanelMD.Size = new Size(825, 652);
+            orderHistoryPanelMD.Size = new Size(842, 652);
             orderHistoryPanelMD.TabIndex = 56;
             // 
             // managerDashboard
@@ -411,7 +411,6 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1008, 729);
-            Controls.Add(generatePanel);
             Controls.Add(roleLabel);
             Controls.Add(managerName);
             Controls.Add(managerLabel);
@@ -420,9 +419,11 @@
             Controls.Add(panel2);
             Controls.Add(orderHistoryPanelMD);
             Controls.Add(stockPanel);
+            Controls.Add(generatePanel);
             Name = "managerDashboard";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Manager Dashboard";
+            FormClosing += managerDashboard_FormClosing;
             Load += managerDashboard_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel1.ResumeLayout(false);

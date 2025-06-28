@@ -91,6 +91,7 @@ namespace TastyBites
             menuListBtn = new Button();
             stockBtn = new Button();
             stockPanel = new Panel();
+            stockSortComboBox = new ComboBox();
             button1 = new Button();
             stockSearchBtn = new Button();
             stockSearchBox = new TextBox();
@@ -104,7 +105,6 @@ namespace TastyBites
             orderHistoryBtn = new Button();
             panel1 = new Panel();
             panel2 = new Panel();
-            stockSortComboBox = new ComboBox();
             ((ISupportInitialize)pictureBox1).BeginInit();
             userPanel.SuspendLayout();
             ((ISupportInitialize)userTableGrid).BeginInit();
@@ -675,6 +675,17 @@ namespace TastyBites
             stockPanel.Size = new Size(850, 654);
             stockPanel.TabIndex = 4;
             // 
+            // stockSortComboBox
+            // 
+            stockSortComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            stockSortComboBox.FormattingEnabled = true;
+            stockSortComboBox.Items.AddRange(new object[] { "Sort By Default", "Low to High", "High to Low" });
+            stockSortComboBox.Location = new Point(697, 5);
+            stockSortComboBox.Name = "stockSortComboBox";
+            stockSortComboBox.Size = new Size(121, 23);
+            stockSortComboBox.TabIndex = 4;
+            stockSortComboBox.SelectedIndexChanged += stockSortComboBox_SelectedIndexChanged_1;
+            // 
             // button1
             // 
             button1.Location = new Point(616, 4);
@@ -863,17 +874,6 @@ namespace TastyBites
             panel2.TabIndex = 45;
             panel2.Paint += panel2_Paint;
             // 
-            // stockSortComboBox
-            // 
-            stockSortComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            stockSortComboBox.FormattingEnabled = true;
-            stockSortComboBox.Items.AddRange(new object[] { "Sort By Default", "Low to High", "High to Low" });
-            stockSortComboBox.Location = new Point(697, 5);
-            stockSortComboBox.Name = "stockSortComboBox";
-            stockSortComboBox.Size = new Size(121, 23);
-            stockSortComboBox.TabIndex = 4;
-            stockSortComboBox.SelectedIndexChanged += stockSortComboBox_SelectedIndexChanged_1;
-            // 
             // AdminDashboard
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -896,6 +896,7 @@ namespace TastyBites
             Name = "AdminDashboard";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Admin Dashboard";
+            FormClosing += AdminDashboard_FormClosing;
             Load += AdminDashboard_Load;
             ((ISupportInitialize)pictureBox1).EndInit();
             userPanel.ResumeLayout(false);

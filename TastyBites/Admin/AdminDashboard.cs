@@ -31,7 +31,7 @@ namespace TastyBites
             userName.Text = user.Username;
             this.Load += AdminDashboard_Load;
 
-            stockSortComboBox.Text = "Sort by"; // Set default text for the combo box
+            stockSortComboBox.Text = "Sort By Default"; // Set default text for the combo box
             // You can show the role or other details if needed
             //roleLabel.Text = "Role: " + user.Role;
         }
@@ -82,6 +82,8 @@ namespace TastyBites
 
         private void AdminDashboard_Load(object sender, EventArgs e)
         {
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             LoadCategoriesIntoDropdown();
             LoadMenuItems();
             LoadUsersIntoGrid();
@@ -683,6 +685,11 @@ namespace TastyBites
             LoadStockHistory(); // Reload all order history
             orderHistorySearchBox.Clear(); // Clear search box
             stockHistoryGrid.ClearSelection(); // Clear any selected rows
+        }
+
+        private void AdminDashboard_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
     }
 

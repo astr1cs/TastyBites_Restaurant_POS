@@ -44,11 +44,14 @@ namespace TastyBites.Manager
 
         private void managerDashboard_Load(object sender, EventArgs e)
         {
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             LoadStockHistory(); // Load stock history on form load
             LoadMenuItems(); // Load menu items on form load
             generatePanel.Visible = false;
             stockPanel.Visible = false;
             orderHistoryPanelMD.Visible = true;
+            stockHistoryGrid.RowHeadersVisible = false;
         }
         //-----------------------------------------------------------SIDEBAR BUTTONS-----------------------------------------------------------
         private void orderHistoryBtn_Click(object sender, EventArgs e)
@@ -324,6 +327,9 @@ namespace TastyBites.Manager
             }
         }
 
-
+        private void managerDashboard_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

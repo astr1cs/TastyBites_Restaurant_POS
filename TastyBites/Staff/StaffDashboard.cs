@@ -127,6 +127,8 @@ namespace TastyBites.Staff
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             LoadMenuItems(); // Load menu items when the form loads
             InitializeOrderTable();
 
@@ -499,6 +501,11 @@ namespace TastyBites.Staff
         private void staffSearchBox_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void StaffDashboard_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

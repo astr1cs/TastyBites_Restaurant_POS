@@ -413,6 +413,7 @@ namespace TastyBites.Staff
             Name = "StaffDashboard";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Staff";
+            FormClosing += StaffDashboard_FormClosing;
             Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)FavIcon).EndInit();
             panel1.ResumeLayout(false);
