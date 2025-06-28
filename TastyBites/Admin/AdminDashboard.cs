@@ -94,7 +94,7 @@ namespace TastyBites
 
         }
 
-
+        //-----------------------------------------------------------------BASIC BUTTONS WORKS--------------------------------------------
         private void LogoutBtn_Click(object sender, EventArgs e)
         {
             this.Hide(); // Hide current dashboard
@@ -142,7 +142,7 @@ namespace TastyBites
             dataPanel.BringToFront();
         }
 
-
+        //-------------------------------------------------------------------------USER MANAGEMENT--------------------------------------
 
         private void addUser_Click(object sender, EventArgs e)
         {
@@ -292,8 +292,27 @@ namespace TastyBites
             }
         }
 
-        //Menu Item Add Button
+        private void userSearchBtn_Click(object sender, EventArgs e)
+        {
+            string searchTerm = userSearchBox.Text.Trim();
+            if (string.IsNullOrEmpty(searchTerm))
+            {
+                LoadUsersIntoGrid(); // Show all users if search is empty
+                return;
+            }
+            DataAccess db = new DataAccess();
+            DataTable filteredUsers = db.SearchUsersByUsername(searchTerm); // We'll create this
+            if (filteredUsers.Rows.Count == 0)
+            {
+                MessageBox.Show("No matching users found.", "Search Result", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            userTableGrid.DataSource = filteredUsers;
+        }
 
+        private void userShowBtn_Click(object sender, EventArgs e)
+        {
+            LoadUsersIntoGrid();
+        }
 
 
         //---------------------------------------------------------------------<MENU FUNCTIONS>--------------------------------------------------//////
@@ -536,26 +555,7 @@ namespace TastyBites
             menuGrid.DataSource = filteredItems;
         }
 
-
-        private void userSearchBtn_Click(object sender, EventArgs e)
-        {
-            string searchTerm = userSearchBox.Text.Trim();
-            if (string.IsNullOrEmpty(searchTerm))
-            {
-                LoadUsersIntoGrid(); // Show all users if search is empty
-                return;
-            }
-            DataAccess db = new DataAccess();
-            DataTable filteredUsers = db.SearchUsersByUsername(searchTerm); // We'll create this
-            if (filteredUsers.Rows.Count == 0)
-            {
-                MessageBox.Show("No matching users found.", "Search Result", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            userTableGrid.DataSource = filteredUsers;
-        }
-
-
-
+        //------------------------------------------------------------------------STOCK MANAGEMENT FUNCTIONS--------------------------------------
         private void stockSearchBtn_Click(object sender, EventArgs e)
         {
             string searchTerm = stockSearchBox.Text.Trim();
@@ -612,12 +612,8 @@ namespace TastyBites
             }
         }
 
-        private void userShowBtn_Click(object sender, EventArgs e)
-        {
-            LoadUsersIntoGrid();
-        }
 
-
+        //-------------------------------------------------------------------------SIDE PANEL BORDER PAINT FUNCTIONS--------------------------------------
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 

@@ -151,7 +151,7 @@ namespace TastyBites.Staff
             }
         }
 
-
+        //--------------------------------------------------------------STAFF DASHBOARD--------------------------------------------------//
 
         private void staffOrderGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -364,70 +364,6 @@ namespace TastyBites.Staff
         {
 
         }
-
-        //private void placeOrderBtn_Click(object sender, EventArgs e)
-        //{
-        //    // Check payment method
-        //    if (!cardRadio.Checked && !cashRadio.Checked)
-        //    {
-        //        MessageBox.Show("Please select a payment method.");
-        //        return;
-        //    }
-
-        //    string paymentMethod = cardRadio.Checked ? "Card" : "Cash";
-        //    string delivery = takeaWayCombo.SelectedIndex == 0 ? "Dine-in" : "Takeaway";
-
-        //    decimal totalAmount = 0;
-        //    List<OrderItemModel> orderItems = new List<OrderItemModel>();
-
-        //    DataAccess db = new DataAccess();
-
-        //    foreach (DataGridViewRow row in staffOrderGridBox.Rows)
-        //    {
-        //        if (row.IsNewRow) continue;
-
-        //        string menuName = Convert.ToString(row.Cells["Name"].Value);
-        //        decimal price = Convert.ToDecimal(row.Cells["Price"].Value);
-        //        int quantity = Convert.ToInt32(row.Cells["Qty"].Value);
-
-        //        totalAmount += price * quantity;
-
-        //        int menuItemId = db.GetMenuItemIdByName(menuName);
-
-        //        orderItems.Add(new OrderItemModel
-        //        {
-        //            MenuItemID = menuItemId,
-        //            Quantity = quantity,
-        //            ItemPriceAtOrderTime = price
-        //        });
-        //    }
-
-        //    int userId = currentUser.UserID;
-
-        //    int orderId = db.InsertOrder(userId, DateTime.Now, delivery, paymentMethod, totalAmount);
-
-        //    foreach (var item in orderItems)
-        //    {
-        //        db.InsertOrderItem(orderId, item.MenuItemID, item.Quantity, item.ItemPriceAtOrderTime);
-        //        // **NEW**: decrement the stock
-        //        int rowsAffected = db.DecrementMenuItemStock(item.MenuItemID, item.Quantity);
-        //        if (rowsAffected == 0)
-        //        {
-        //            // handle the case where stock update failed (e.g. no such MenuItemID)
-        //            MessageBox.Show($"Failed to update stock for item ID {item.MenuItemID}");
-        //        }
-        //    }
-
-        //    MessageBox.Show("Order placed successfully!");
-
-        //    // Clear the list and table
-        //    orderItems.Clear();
-        //    orderTable.Rows.Clear(); // optional if RefreshOrderGridBox is called next
-        //    subTotalBox.Text = "0.00"; // Reset subtotal display
-
-
-
-        //}
         private void placeOrderBtn_Click(object sender, EventArgs e)
         {
             if (!cardRadio.Checked && !cashRadio.Checked)

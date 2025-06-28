@@ -95,10 +95,15 @@ namespace TastyBites.Manager
 
 
         }
+        private void logoutBtn_Click(object sender, EventArgs e)
+        {
+            this.Hide(); // Hide current dashboard
+            Login loginForm = new Login();
+            loginForm.Show(); // Show login form
+        }
 
 
-
-
+        //------------------------------------------------------------ORDER HISTORY PANEL-----------------------------------------------------------
         private void orderHistorySearchBtn_Click(object sender, EventArgs e)
         {
             string searchTerm = orderHistorySearchBox.Text.Trim();
@@ -139,7 +144,7 @@ namespace TastyBites.Manager
             orderHistorySearchBox.Clear(); // Clear search box
             stockHistoryGrid.ClearSelection(); // Clear any selected rows
         }
-
+        //----------------------------------------------------------------------------------------------------------------SIDEBAR PANEL PAINT EVENTS
         private void panel2_Paint(object sender, PaintEventArgs e)
         {
             using (Pen pen = new Pen(Color.LightGray, 1)) // 1 pixel thick
@@ -158,12 +163,7 @@ namespace TastyBites.Manager
             }
         }
 
-        private void logoutBtn_Click(object sender, EventArgs e)
-        {
-            this.Hide(); // Hide current dashboard
-            Login loginForm = new Login();
-            loginForm.Show(); // Show login form
-        }
+        //------------------------------------------------------------MENU STOCK PANEL-----------------------------------------------------------
         //Load Menu items
         private void LoadMenuItems()
         {
@@ -233,7 +233,7 @@ namespace TastyBites.Manager
                 stockGridView.DataSource = allMenuItems;
             }
         }
-
+        //------------------------------------------------------------GENERATE REPORT PANEL-----------------------------------------------------------
         private void genBtn_Click(object sender, EventArgs e)
         {
             try

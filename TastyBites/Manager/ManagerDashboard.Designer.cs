@@ -50,24 +50,24 @@
             stockHistoryGrid = new DataGridView();
             panel2 = new Panel();
             stockPanel = new Panel();
+            stockSortComboBox = new ComboBox();
+            showBtn = new Button();
+            stockSearchBtn = new Button();
+            stockSearchBox = new TextBox();
+            stockGridView = new DataGridView();
             generatePanel = new Panel();
             label2 = new Label();
             label1 = new Label();
             genBtn = new Button();
             dateTimePickerEnd = new DateTimePicker();
             dateTimePickerStart = new DateTimePicker();
-            stockSortComboBox = new ComboBox();
-            showBtn = new Button();
-            stockSearchBtn = new Button();
-            stockSearchBox = new TextBox();
-            stockGridView = new DataGridView();
             orderHistoryPanelMD = new Panel();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)stockHistoryGrid).BeginInit();
             stockPanel.SuspendLayout();
-            generatePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)stockGridView).BeginInit();
+            generatePanel.SuspendLayout();
             orderHistoryPanelMD.SuspendLayout();
             SuspendLayout();
             // 
@@ -139,9 +139,9 @@
             // generateBtn
             // 
             generateBtn.Font = new Font("Microsoft Sans Serif", 12F);
-            generateBtn.Location = new Point(25, 197);
+            generateBtn.Location = new Point(9, 197);
             generateBtn.Name = "generateBtn";
-            generateBtn.Size = new Size(121, 30);
+            generateBtn.Size = new Size(131, 30);
             generateBtn.TabIndex = 56;
             generateBtn.Text = "Generate PDF";
             generateBtn.TextAlign = ContentAlignment.MiddleLeft;
@@ -259,63 +259,6 @@
             stockPanel.Size = new Size(850, 654);
             stockPanel.TabIndex = 55;
             // 
-            // generatePanel
-            // 
-            generatePanel.Controls.Add(label2);
-            generatePanel.Controls.Add(label1);
-            generatePanel.Controls.Add(genBtn);
-            generatePanel.Controls.Add(dateTimePickerEnd);
-            generatePanel.Controls.Add(dateTimePickerStart);
-            generatePanel.Location = new Point(164, 80);
-            generatePanel.Name = "generatePanel";
-            generatePanel.Size = new Size(850, 654);
-            generatePanel.TabIndex = 57;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("MS Reference Sans Serif", 9.75F);
-            label2.Location = new Point(91, 91);
-            label2.Name = "label2";
-            label2.Size = new Size(73, 16);
-            label2.TabIndex = 59;
-            label2.Text = "End Date:";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("MS Reference Sans Serif", 9.75F);
-            label1.Location = new Point(81, 60);
-            label1.Name = "label1";
-            label1.Size = new Size(83, 16);
-            label1.TabIndex = 58;
-            label1.Text = "Start Date:";
-            // 
-            // genBtn
-            // 
-            genBtn.Font = new Font("Microsoft Sans Serif", 12F);
-            genBtn.Location = new Point(170, 131);
-            genBtn.Name = "genBtn";
-            genBtn.Size = new Size(200, 30);
-            genBtn.TabIndex = 57;
-            genBtn.Text = "Generate";
-            genBtn.UseVisualStyleBackColor = true;
-            genBtn.Click += genBtn_Click;
-            // 
-            // dateTimePickerEnd
-            // 
-            dateTimePickerEnd.Location = new Point(170, 91);
-            dateTimePickerEnd.Name = "dateTimePickerEnd";
-            dateTimePickerEnd.Size = new Size(200, 23);
-            dateTimePickerEnd.TabIndex = 61;
-            // 
-            // dateTimePickerStart
-            // 
-            dateTimePickerStart.Location = new Point(170, 62);
-            dateTimePickerStart.Name = "dateTimePickerStart";
-            dateTimePickerStart.Size = new Size(200, 23);
-            dateTimePickerStart.TabIndex = 60;
-            // 
             // stockSortComboBox
             // 
             stockSortComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -395,6 +338,63 @@
             stockGridView.Size = new Size(813, 576);
             stockGridView.TabIndex = 3;
             // 
+            // generatePanel
+            // 
+            generatePanel.Controls.Add(label2);
+            generatePanel.Controls.Add(label1);
+            generatePanel.Controls.Add(genBtn);
+            generatePanel.Controls.Add(dateTimePickerEnd);
+            generatePanel.Controls.Add(dateTimePickerStart);
+            generatePanel.Location = new Point(164, 80);
+            generatePanel.Name = "generatePanel";
+            generatePanel.Size = new Size(850, 654);
+            generatePanel.TabIndex = 57;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("MS Reference Sans Serif", 9.75F);
+            label2.Location = new Point(91, 91);
+            label2.Name = "label2";
+            label2.Size = new Size(73, 16);
+            label2.TabIndex = 59;
+            label2.Text = "End Date:";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("MS Reference Sans Serif", 9.75F);
+            label1.Location = new Point(81, 60);
+            label1.Name = "label1";
+            label1.Size = new Size(83, 16);
+            label1.TabIndex = 58;
+            label1.Text = "Start Date:";
+            // 
+            // genBtn
+            // 
+            genBtn.Font = new Font("Microsoft Sans Serif", 12F);
+            genBtn.Location = new Point(170, 131);
+            genBtn.Name = "genBtn";
+            genBtn.Size = new Size(200, 30);
+            genBtn.TabIndex = 57;
+            genBtn.Text = "Generate";
+            genBtn.UseVisualStyleBackColor = true;
+            genBtn.Click += genBtn_Click;
+            // 
+            // dateTimePickerEnd
+            // 
+            dateTimePickerEnd.Location = new Point(170, 91);
+            dateTimePickerEnd.Name = "dateTimePickerEnd";
+            dateTimePickerEnd.Size = new Size(200, 23);
+            dateTimePickerEnd.TabIndex = 61;
+            // 
+            // dateTimePickerStart
+            // 
+            dateTimePickerStart.Location = new Point(170, 62);
+            dateTimePickerStart.Name = "dateTimePickerStart";
+            dateTimePickerStart.Size = new Size(200, 23);
+            dateTimePickerStart.TabIndex = 60;
+            // 
             // orderHistoryPanelMD
             // 
             orderHistoryPanelMD.Controls.Add(stockHistoryGrid);
@@ -429,9 +429,9 @@
             ((System.ComponentModel.ISupportInitialize)stockHistoryGrid).EndInit();
             stockPanel.ResumeLayout(false);
             stockPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)stockGridView).EndInit();
             generatePanel.ResumeLayout(false);
             generatePanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)stockGridView).EndInit();
             orderHistoryPanelMD.ResumeLayout(false);
             orderHistoryPanelMD.PerformLayout();
             ResumeLayout(false);
