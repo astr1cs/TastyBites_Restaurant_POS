@@ -10,6 +10,7 @@ namespace TastyBites.Database
     {
         //Database Connection String
         private readonly string connectionString = @"Data Source=DESKTOP-KP493J1\SQLEXPRESS;Initial Catalog=Demo;Integrated Security=True";
+        //private readonly string connectionString = @"Data Source=VICTUS-24H2\SQLEXPRESS;Initial Catalog=Demo;Persist Security Info=True;User ID=sa;Password=@1812;";
 
         ///---------------------------------------------------ADMIN AUTHENTICATION AND MANAGEMENT---------------------------------------------------///
         // Authenticate user by checking username and password from DB
