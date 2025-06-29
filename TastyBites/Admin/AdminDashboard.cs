@@ -84,12 +84,18 @@ namespace TastyBites
         {
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
+
             LoadCategoriesIntoDropdown();
             LoadMenuItems();
             LoadUsersIntoGrid();
             LoadStockHistory();
             addUser.Visible = true;
             saveChangesButton.Visible = false;
+
+            // Set DataGridView properties for better UI
+            userTableGrid.RowHeadersVisible = false; // Hide row headers for better UI  
+            menuGrid.RowHeadersVisible = false; // Hide row headers for better UI   
+            stockHistoryGrid.RowHeadersVisible = false; // Hide row headers for better UI
 
             editMenuBtn.Visible = true;
             saveChangesMenu.Visible = false;
@@ -584,7 +590,6 @@ namespace TastyBites
         {
             LoadMenuItems();
         }
-
 
 
         private void stockSortComboBox_SelectedIndexChanged_1(object sender, EventArgs e)

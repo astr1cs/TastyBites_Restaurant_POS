@@ -887,10 +887,10 @@ namespace TastyBites
             Controls.Add(panel1);
             Controls.Add(usernameLabel);
             Controls.Add(panel2);
-            Controls.Add(stockPanel);
-            Controls.Add(menuPanel);
             Controls.Add(userPanel);
             Controls.Add(dataPanel);
+            Controls.Add(stockPanel);
+            Controls.Add(menuPanel);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "AdminDashboard";
